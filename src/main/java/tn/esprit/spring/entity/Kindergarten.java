@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-
 public class Kindergarten implements Serializable {
     /**
 	 * 
@@ -31,6 +29,9 @@ public class Kindergarten implements Serializable {
     private String description;
     private String address;
     private int nombreemploye;
+    
+	@ManyToMany (mappedBy = "kindergarten")
+	Event event;
 
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    private List<User> user;
