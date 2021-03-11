@@ -1,14 +1,20 @@
 package tn.esprit.spring.entity;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
-
+@Data
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Parent extends User implements Serializable{
 
@@ -26,85 +32,8 @@ public class Parent extends User implements Serializable{
 	
 
 
-	
-	public Parent(int id, String login, String password,Role role, Date dateRegistration) {
-		super(id, login, password, role, dateRegistration);
-	}
-	
+	@ManyToMany (cascade = CascadeType.ALL)
+	private Set<Event> event;
 
-	public Parent(int id, String login, String password,Role role, Date dateRegistration,
-			String firstName, String lastName, String email, String address, int phone,
-			Gender gender, Date birthday, Event event) {
-		super(id, login, password, role, dateRegistration);
-		this.firstName = firstName;
-		LastName = lastName;
-		Email = email;
-		Address = address;
-		Phone = phone;
-		Gender = gender;
-		this.birthday = birthday;
-		this.event = event;
-	}
-
-
-	@ManyToMany (mappedBy = "parent")
-	Event event;
-
-	
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return LastName;
-	}
-
-	public void setLastName(String lastName) {
-		LastName = lastName;
-	}
-
-	public String getEmail() {
-		return Email;
-	}
-
-	public void setEmail(String email) {
-		Email = email;
-	}
-
-	public String getAddress() {
-		return Address;
-	}
-
-	public void setAddress(String address) {
-		Address = address;
-	}
-
-	public int getPhone() {
-		return Phone;
-	}
-
-	public void setPhone(int phone) {
-		Phone = phone;
-	}
-
-	public Gender getGender() {
-		return Gender;
-	}
-
-	public void setGender(Gender gender) {
-		Gender = gender;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
 
 }

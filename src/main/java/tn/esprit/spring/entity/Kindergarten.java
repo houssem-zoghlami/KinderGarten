@@ -30,8 +30,8 @@ public class Kindergarten implements Serializable {
     private String address;
     private int nombreemploye;
     
-	@ManyToMany (mappedBy = "kindergarten")
-	Event event;
+//	@ManyToMany (mappedBy = "kindergarten")
+//	Event event;
 
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    private List<User> user;

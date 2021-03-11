@@ -39,6 +39,7 @@ public class User implements Serializable {
     @Temporal (TemporalType.DATE)
     private Date dateInscription;
 
+
 //    @OneToMany(cascade = CascadeType.ALL,mappedBy="post")
 //    private List<Post> post;
 
