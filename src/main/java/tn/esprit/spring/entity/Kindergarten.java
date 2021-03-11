@@ -18,7 +18,11 @@ import java.util.List;
 @Setter
 
 public class Kindergarten implements Serializable {
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private Long id;
