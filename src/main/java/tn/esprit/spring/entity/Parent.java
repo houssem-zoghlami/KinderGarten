@@ -24,9 +24,18 @@ public class Parent extends User implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	
-	public Parent(String firstName, String lastName, String email, String address, int phone,
-			tn.esprit.spring.entity.Gender gender, Date birthday) {
-		super();
+
+
+	
+	public Parent(int id, String login, String password,Role role, Date dateRegistration) {
+		super(id, login, password, role, dateRegistration);
+	}
+	
+
+	public Parent(int id, String login, String password,Role role, Date dateRegistration,
+			String firstName, String lastName, String email, String address, int phone,
+			Gender gender, Date birthday, Event event) {
+		super(id, login, password, role, dateRegistration);
 		this.firstName = firstName;
 		LastName = lastName;
 		Email = email;
@@ -34,9 +43,10 @@ public class Parent extends User implements Serializable{
 		Phone = phone;
 		Gender = gender;
 		this.birthday = birthday;
+		this.event = event;
 	}
 
-	
+
 	@ManyToMany (mappedBy = "parent")
 	Event event;
 
