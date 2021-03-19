@@ -5,24 +5,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
-
-import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-public class Parent extends User implements Serializable{
+public class Parent extends AppUser implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private String firstName;
-	private String LastName;
-	private String Email;
+	//private String firstName;
+	//private String LastName;
+	//private String Email;
 	private String Address;
 	private int Phone;
 	private Gender Gender;
@@ -32,8 +32,6 @@ public class Parent extends User implements Serializable{
 	
 
 
-	@ManyToMany (cascade = CascadeType.ALL)
-	private Set<Event> event;
 
 
 }

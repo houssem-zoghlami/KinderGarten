@@ -5,11 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
-
-import javax.persistence.*;
 
 
 @Data
@@ -40,6 +38,6 @@ public class Event implements Serializable {
 	/**
 	 *
 	 */
-	@ManyToMany(mappedBy = "event",cascade = CascadeType.ALL)
-     private Set<Parent> parent;
+//	@ManyToMany(mappedBy = "event",cascade = CascadeType.ALL)
+//     private Set<Parent> parent;
 }

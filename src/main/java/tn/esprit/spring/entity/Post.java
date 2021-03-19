@@ -6,9 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.*;
 
 @Entity
 @Data
@@ -23,8 +24,6 @@ public class Post implements Serializable {
     private String contained;
     private Integer likeCount = 0;
 
-//    @ManyToOne
-//     User user;
 //
 
 }
