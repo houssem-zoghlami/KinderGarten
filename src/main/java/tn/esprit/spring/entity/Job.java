@@ -4,5 +4,5 @@ public enum Job {
     Headmaster,
     Teacher,
     Cook,
-    Doctor,
+    Doctor
 }
