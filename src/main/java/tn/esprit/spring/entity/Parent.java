@@ -2,55 +2,63 @@ package tn.esprit.spring.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import tn.esprit.spring.entity.Genders;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 @Entity
-public class Parent extends User implements Serializable{
+
+public class Parent extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String firstName;
-	private String LastName;
-	private String Email;
-	private String Address;
-	private int Phone;
-	private Gender Gender;
-	
+	private String lastName;
+	private String email;
+	private String address;
+	private int phone;
+
+	private Genders gender;
+
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
-	
 
+	@ManyToMany(mappedBy = "parent")
+	private List<Event> event;
 
-	
-	public Parent(int id, String login, String password,Role role, Date dateRegistration) {
-		super(id, login, password, role, dateRegistration);
-	}
-	
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+	private List<Child> child;
 
-	public Parent(int id, String login, String password,Role role, Date dateRegistration,
-			String firstName, String lastName, String email, String address, int phone,
-			Gender gender, Date birthday, Event event) {
-		super(id, login, password, role, dateRegistration);
+	@OneToOne(mappedBy = "parent", cascade = CascadeType.ALL)
+	private Coupon coupon;
+
+	public Parent(String firstName, String lastName, String email, String address, int phone, Genders gender,
+			Date birthday, List<Event> event, List<Child> child) {
+		super();
 		this.firstName = firstName;
-		LastName = lastName;
-		Email = email;
-		Address = address;
-		Phone = phone;
-		Gender = gender;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.phone = phone;
+		this.gender = gender;
 		this.birthday = birthday;
 		this.event = event;
+		this.child = child;
 	}
 
+	public Parent() {
+		super();
+	}
 
-	@ManyToMany (mappedBy = "parent")
-	Event event;
-
-	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -60,43 +68,43 @@ public class Parent extends User implements Serializable{
 	}
 
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.lastName = lastName;
 	}
 
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
 
 	public int getPhone() {
-		return Phone;
+		return this.phone;
 	}
 
 	public void setPhone(int phone) {
-		Phone = phone;
+		this.phone = phone;
 	}
 
-	public Gender getGender() {
-		return Gender;
+	public Genders getGender() {
+		return this.gender;
 	}
 
-	public void setGender(Gender gender) {
-		Gender = gender;
+	public void setGender(Genders gender) {
+		this.gender = gender;
 	}
 
 	public Date getBirthday() {
@@ -105,6 +113,22 @@ public class Parent extends User implements Serializable{
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
+	}
+
+	public List<Event> getEvent() {
+		return event;
+	}
+
+	public void setEvent(List<Event> event) {
+		this.event = event;
+	}
+
+	public List<Child> getChild() {
+		return child;
+	}
+
+	public void setChild(List<Child> child) {
+		this.child = child;
 	}
 
 }

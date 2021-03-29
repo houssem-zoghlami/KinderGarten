@@ -9,39 +9,33 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-
 @Entity
 @Data
 @NoArgsConstructor
 @Getter
 @Setter
-public class Kindergarten implements Serializable {
-    /**
+
+public class Kindergarten extends User implements Serializable {
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	private static final long serialVersionUID = 1L;;
+	private String name;
+	private String email;
+	private String description;
+	private String address;
+	private int nombreemploye;
 
-    private Long id;
-    private String name;
-    private String email;
-    private String description;
-    private String address;
-    private int nombreemploye;
-    
-	@ManyToMany (mappedBy = "kindergarten")
-	Event event;
-
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    private List<User> user;
-//
-//    @OneToMany(cascade = CascadeType.ALL,mappedBy="child")
-//    private List<Child> child;
-
-
-
-
-
+	@ManyToMany(mappedBy = "kindergarten", cascade = CascadeType.ALL)
+	private List<Event> event;
+	
+	@OneToMany(mappedBy ="kindergarten",cascade = CascadeType.ALL)
+	private List<Child> child;
+	
+	// @ManyToMany(cascade = CascadeType.ALL)
+	// private List<User> user;
+	//
+	// @OneToMany(cascade = CascadeType.ALL,mappedBy="child")
+	// private List<Child> child;
 
 }

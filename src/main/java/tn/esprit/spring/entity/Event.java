@@ -2,54 +2,84 @@ package tn.esprit.spring.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 public class Event implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
-	private int id;
-	
-	private String Title;
-	
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id_event;
+
+	private String title;
+
 	@Temporal(TemporalType.DATE)
 	private Date opening;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date Duration;
-	
-	private int nbrs_participants;
+
+	private int nbrs_Participants = 0;
 	private Event_for event_For;
 	private Event_Activity event_Activity;
+	private State_event State_event;
 
 	@ManyToMany
-	Parent parent;
-	@ManyToMany 
-	Kindergarten kindergarten;
-	
-	public int getId() {
-		return id;
+	private List<Parent> parent;
+	@ManyToMany
+	private List<Kindergarten> kindergarten;
+
+	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+	private List<Coupon> coupon;
+
+
+
+	public Event(int id_event, String title, Date opening, Date duration, int nbrs_participants, Event_for event_For,
+			Event_Activity event_Activity, State_event state_event, List<Parent> parent,
+			List<Kindergarten> kindergarten, List<Coupon> coupon) {
+		super();
+		this.id_event = id_event;
+		this.title = title;
+		this.opening = opening;
+		Duration = duration;
+		this.nbrs_Participants = nbrs_participants;
+		this.event_For = event_For;
+		this.event_Activity = event_Activity;
+		State_event = state_event;
+		this.parent = parent;
+		this.kindergarten = kindergarten;
+		this.coupon = coupon;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public Event() {
+		super();
+	}
+
+	public int getId_event() {
+		return id_event;
+	}
+
+	public void setId_event(int id_event) {
+		this.id_event = id_event;
 	}
 
 	public String getTitle() {
-		return Title;
+		return this.title;
 	}
 
 	public void setTitle(String title) {
-		Title = title;
+		this.title = title;
 	}
 
 	public Date getOpening() {
@@ -69,11 +99,11 @@ public class Event implements Serializable {
 	}
 
 	public int getNbrs_participants() {
-		return nbrs_participants;
+		return nbrs_Participants;
 	}
 
 	public void setNbrs_participants(int nbrs_participants) {
-		this.nbrs_participants = nbrs_participants;
+		this.nbrs_Participants = nbrs_participants;
 	}
 
 	public Event_for getEvent_For() {
@@ -92,22 +122,46 @@ public class Event implements Serializable {
 		this.event_Activity = event_Activity;
 	}
 
-	public Event(int id, String title, Date opening, Date duration, int nbrs_participants, Event_for event_For,
-			Event_Activity event_Activity) {
-		super();
-		this.id = id;
-		Title = title;
-		this.opening = opening;
-		Duration = duration;
-		this.nbrs_participants = nbrs_participants;
-		this.event_For = event_For;
-		this.event_Activity = event_Activity;
+	public State_event getState_event() {
+		return State_event;
 	}
 
-	public Event() {
-		super();
+	public void setState_event(State_event state_event) {
+		State_event = state_event;
 	}
-	
-	 
-	
+
+	public List<Parent> getParent() {
+		return parent;
+	}
+
+	public void setParent(List<Parent> parent) {
+		this.parent = parent;
+	}
+
+	public int getNbrs_Participants() {
+		return nbrs_Participants;
+	}
+
+	public void setNbrs_Participants(int nbrs_Participants) {
+		this.nbrs_Participants = nbrs_Participants;
+	}
+
+	public List<Kindergarten> getKindergarten() {
+		return kindergarten;
+	}
+
+	public void setKindergarten(List<Kindergarten> kindergarten) {
+		this.kindergarten = kindergarten;
+	}
+
+	public List<Coupon> getCoupon() {
+		return coupon;
+	}
+
+	public void setCoupon(List<Coupon> coupon) {
+		this.coupon = coupon;
+	}
+
+
+
 }
