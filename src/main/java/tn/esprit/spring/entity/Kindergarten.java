@@ -1,6 +1,7 @@
 package tn.esprit.spring.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@EqualsAndHashCode(callSuper=true)
 @Data
 @NoArgsConstructor
 @Getter
@@ -26,7 +28,7 @@ public class Kindergarten extends User implements Serializable {
 	private String address;
 	private int nombreemploye;
 
-	@ManyToMany(mappedBy = "kindergarten", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "kindergarten", cascade = CascadeType.ALL)
 	private List<Event> event;
 	
 	@OneToMany(mappedBy ="kindergarten",cascade = CascadeType.ALL)

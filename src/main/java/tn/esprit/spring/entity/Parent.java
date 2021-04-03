@@ -15,8 +15,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+@Entity
+@EqualsAndHashCode(callSuper=true)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Parent extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -41,94 +49,6 @@ public class Parent extends User implements Serializable {
 	@OneToOne(mappedBy = "parent", cascade = CascadeType.ALL)
 	private Coupon coupon;
 
-	public Parent(String firstName, String lastName, String email, String address, int phone, Genders gender,
-			Date birthday, List<Event> event, List<Child> child) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.address = address;
-		this.phone = phone;
-		this.gender = gender;
-		this.birthday = birthday;
-		this.event = event;
-		this.child = child;
-	}
 
-	public Parent() {
-		super();
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public int getPhone() {
-		return this.phone;
-	}
-
-	public void setPhone(int phone) {
-		this.phone = phone;
-	}
-
-	public Genders getGender() {
-		return this.gender;
-	}
-
-	public void setGender(Genders gender) {
-		this.gender = gender;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
-	public List<Event> getEvent() {
-		return event;
-	}
-
-	public void setEvent(List<Event> event) {
-		this.event = event;
-	}
-
-	public List<Child> getChild() {
-		return child;
-	}
-
-	public void setChild(List<Child> child) {
-		this.child = child;
-	}
 
 }
