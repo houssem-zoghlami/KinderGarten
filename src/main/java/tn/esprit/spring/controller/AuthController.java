@@ -5,13 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.spring.dto.AuthenticationResponse;
-import tn.esprit.spring.dto.LoginRequest;
-import tn.esprit.spring.dto.RefreshTokenRequest;
-import tn.esprit.spring.dto.RegisterRequest;
+import tn.esprit.spring.dto.*;
 import tn.esprit.spring.repository.UserRepository;
 import tn.esprit.spring.service.AuthService;
 import tn.esprit.spring.service.RefreshTokenService;
+import tn.esprit.spring.sms.Service;
 
 import javax.validation.Valid;
 
@@ -21,15 +19,14 @@ import javax.validation.Valid;
 public class AuthController {
     @Autowired
     UserRepository userRepository;
-
-
-
     private final AuthService authService;
     private final RefreshTokenService refreshTokenService;
+    private final Service service;
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody RegisterRequest resisterRequest) {
         authService.signup(resisterRequest);
+
         return new ResponseEntity<>("User Registration Successful!", HttpStatus.OK);
     }
 
@@ -41,6 +38,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
+
         return authService.login(loginRequest);
 
     }
@@ -57,8 +55,8 @@ public class AuthController {
     }
     //change password for the current user
     @PutMapping("/changepwd")
-    public ResponseEntity<String> changepwd(@RequestBody RegisterRequest resisterRequest) {
-        authService.changepwd(resisterRequest);
+    public ResponseEntity<String> changepwd(@RequestBody ResetPassword resetPassword) {
+        authService.changepwd(resetPassword);
         return new ResponseEntity<>("password reset successful!", HttpStatus.OK);
     }
 //change password for non logged in user

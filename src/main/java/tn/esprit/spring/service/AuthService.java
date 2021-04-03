@@ -10,17 +10,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tn.esprit.spring.dto.AuthenticationResponse;
-import tn.esprit.spring.dto.LoginRequest;
-import tn.esprit.spring.dto.RefreshTokenRequest;
-import tn.esprit.spring.dto.RegisterRequest;
-import tn.esprit.spring.exceptions.SpringForumException;
+import tn.esprit.spring.dto.*;
 import tn.esprit.spring.entity.NotificationEmail;
 import tn.esprit.spring.entity.User;
 import tn.esprit.spring.entity.VerificationToken;
+import tn.esprit.spring.exceptions.SpringForumException;
 import tn.esprit.spring.repository.UserRepository;
 import tn.esprit.spring.repository.VerificationTokenRepository;
 import tn.esprit.spring.security.JwtProvider;
+import tn.esprit.spring.sms.SmsRequest;
+import tn.esprit.spring.sms.TwilioConfiguration;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -37,6 +36,10 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
     private final RefreshTokenService refreshTokenService;
+    private final tn.esprit.spring.sms.Service smsSender;
+    private final TwilioConfiguration twilioConfiguration;
+
+
 
     @Transactional
     public void signup(RegisterRequest registerRequest) {
@@ -46,10 +49,16 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setCreated(Instant.now());
         user.setEnabled(false);
+        user.setPhoneNumber(user.getPhoneNumber());
 
         userRepository.save(user);
 
         String token = generateVerificationToken(user);
+        smsSender.sendSms(new SmsRequest("+21621866406","hello please " +
+                "please click on the below url to activate your account: " +
+                "http://localhost:8081/api/auth/accountVerification/" + token));
+
+
         mailService.sendMail(new NotificationEmail("Please Activate your Account.", user.getEmail(),
                 "Thank you for signing up to our Forum, " +
                         "please click on the below url to activate your account : " +
@@ -120,13 +129,14 @@ public class AuthService {
 
         return !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
     }
-    public void changepwd(RegisterRequest registerRequest) {
+    public void changepwd(ResetPassword resetPassword) {
         User user = getCurrentUser();
-        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        user.setPassword(passwordEncoder.encode(resetPassword.getPassword()));
 
         userRepository.save(user);
+        smsSender.sendSms(new SmsRequest("+21621866406","password reset successful: thank you" + "" +
+                "your new password is "+ passwordEncoder.upgradeEncoding(user.getPassword())));
 
-        String token = generateVerificationToken(user);
         mailService.sendMail(new NotificationEmail("Reset password .", user.getEmail(),
                         " password reset successful: thank you "
                          + user.getUsername()));
