@@ -54,7 +54,7 @@ public class AuthService {
         userRepository.save(user);
 
         String token = generateVerificationToken(user);
-        smsSender.sendSms(new SmsRequest("+21621866406","hello please " +
+        smsSender.sendSms(new SmsRequest("","hello please " +
                 "please click on the below url to activate your account: " +
                 "http://localhost:8081/api/auth/accountVerification/" + token));
 
@@ -134,7 +134,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(resetPassword.getPassword()));
 
         userRepository.save(user);
-        smsSender.sendSms(new SmsRequest("+21621866406","password reset successful: thank you" + "" +
+        smsSender.sendSms(new SmsRequest("","password reset successful: thank you" + "" +
                 "your new password is "+ passwordEncoder.upgradeEncoding(user.getPassword())));
 
         mailService.sendMail(new NotificationEmail("Reset password .", user.getEmail(),
