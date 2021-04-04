@@ -28,8 +28,8 @@ public class Coupon implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id_coupon;
 
-	private int price;
-	private int nbrs_coupon;
+	private int price=0;
+	private int nbrs_coupon=0;
 
 	@Temporal(TemporalType.DATE)
 	private Date date_coupon;

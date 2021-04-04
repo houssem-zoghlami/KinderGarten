@@ -25,15 +25,14 @@ public class Child implements Serializable {
 	private Long id_child;
 	private String firstname;
 	private String lastname;
-
+	
+	@Enumerated(EnumType.STRING)
 	private Genders gender;
+	
 	private boolean subscribe;
 	private int age;
 	@Temporal(TemporalType.DATE)
 	private Date date;
-
-	@Enumerated(EnumType.STRING)
-	private Level level;
 
 	@ManyToOne
 	private Parent parent;

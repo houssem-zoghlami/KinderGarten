@@ -8,7 +8,8 @@ import tn.esprit.spring.entity.Genders;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -35,6 +36,7 @@ public class Parent extends User implements Serializable {
 	private String address;
 	private int phone;
 
+	@Enumerated(EnumType.STRING)
 	private Genders gender;
 
 	@Temporal(TemporalType.DATE)

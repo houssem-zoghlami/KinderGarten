@@ -1,6 +1,6 @@
 package tn.esprit.spring.service;
 
-import java.util.Date;
+
 import java.util.List;
 
 import tn.esprit.spring.entity.Event;
@@ -14,8 +14,7 @@ public interface IEventService {
 
 	public void deleteEvent(int id);
 
-	public void updateEvent(int id, String Title, Date opening, Date Duration, Event_for event_For,
-			Event_Activity event_Activity);
+	public Event updateEvent(int id, Event event);
 
 	public Event retrieveEvent(int id);
 

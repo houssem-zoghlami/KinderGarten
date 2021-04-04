@@ -13,7 +13,7 @@ public interface IParentService {
 
 	public void deleteParent(int id);
 
-	public void updateParent(int id, String firstName, String lastName, int phone);
+	public Parent updateParent(int id, Parent parent);
 
 	public Parent retrieveParent(int id);
 	

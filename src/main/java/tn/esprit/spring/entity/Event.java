@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,15 +20,24 @@ import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Entity
+import tn.esprit.spring.entity.Event_for;
+import tn.esprit.spring.entity.Event_Activity;
+import tn.esprit.spring.entity.State_event;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Getter
+@Setter
 public class Event implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1496106056885440532L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id_event;
@@ -40,21 +51,27 @@ public class Event implements Serializable {
 	private Date Duration;
 
 	private int nbrs_Participants = 0;
-	private Event_for event_For;
-	private Event_Activity event_Activity;
-	private State_event State_event;
-	private float cost;
+
+	@Enumerated(EnumType.STRING)
+	private Event_for eventFor;
+
+	@Enumerated(EnumType.STRING)
+	private Event_Activity eventActivity;
+
+	@Enumerated(EnumType.STRING)
+	private State_event stateEvent;
 
 	@ManyToMany
 	private List<Parent> parent;
 
 	@ManyToOne
-	private List<Kindergarten> kindergarten;
+	private Kindergarten kindergarten;
 
 	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
 	private List<Coupon> coupon;
+
+	@OneToOne(mappedBy = "event", cascade = CascadeType.ALL)
+	private Bill bill;
 	
-	@OneToOne (mappedBy = "event", cascade = CascadeType.ALL)
-	private Bill bill; 
 
 }

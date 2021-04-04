@@ -27,13 +27,24 @@ public class ParentServiceImpl implements IParentService {
 	}
 
 	@Override
-	public void updateParent(int id, String firstName, String lastName, int phone) {
+	public Parent updateParent(int id, Parent parent) {
 
-		Parent parent = parentRepository.findById(id).orElse(null);
-		parent.setFirstName(firstName);
-		parent.setLastName(lastName);
-		parent.setPhone(phone);
-		parentRepository.save(parent);
+		Parent parents = parentRepository.findById(id).orElse(null);
+		
+		if (parent.getPhone() != 0) {
+			parents.setPhone(parent.getPhone());
+		}
+		if (parent.getAddress() != null) {
+			parents.setAddress(parent.getAddress());
+		}
+		if (parent.getFirstName() != null) {
+			parents.setFirstName(parent.getFirstName());
+		}
+		if (parent.getLastName() != null) {
+			parents.setLastName(parent.getLastName());
+		}
+		parentRepository.save(parents);
+		return parents;
 	}
 
 	@Override
