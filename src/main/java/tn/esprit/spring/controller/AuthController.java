@@ -36,6 +36,7 @@ public class AuthController {
         return new ResponseEntity<>("Account Activated Successfully!", HttpStatus.OK);
     }
 
+
     @PostMapping("/login")
     public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
 
@@ -61,5 +62,7 @@ public class AuthController {
     }
 //change password for non logged in user
 
-
 }
+
+
+

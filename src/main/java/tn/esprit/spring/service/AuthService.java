@@ -49,14 +49,15 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setCreated(Instant.now());
         user.setEnabled(false);
-        user.setPhoneNumber(user.getPhoneNumber());
+        user.setPhoneNumber(registerRequest.getPhoneNumber());
 
         userRepository.save(user);
+        String phonenumber =user.getPhoneNumber();
 
         String token = generateVerificationToken(user);
-        smsSender.sendSms(new SmsRequest("","hello please " +
-                "please click on the below url to activate your account: " +
-                "http://localhost:8081/api/auth/accountVerification/" + token));
+//        smsSender.sendSms(new SmsRequest("+21621866406","amin ya m3allem " +
+//                "please click on the below url to activate your account: " +
+//                "http://localhost:8081/api/auth/accountVerification/" + token));
 
 
         mailService.sendMail(new NotificationEmail("Please Activate your Account.", user.getEmail(),
@@ -79,7 +80,9 @@ public class AuthService {
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
         verificationToken.orElseThrow(() -> new SpringForumException("Invalid token"));
         fetchUserAndEnable(verificationToken.get());
+
     }
+
 
     @Transactional
     private void fetchUserAndEnable(VerificationToken verificationToken) {
@@ -142,6 +145,8 @@ public class AuthService {
                          + user.getUsername()));
     }
 //    public void changepwdnonloggedinuser(RegisterRequest registerRequest) {
+//
+//    }
 //        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 //
 //        userRepository.save(user);

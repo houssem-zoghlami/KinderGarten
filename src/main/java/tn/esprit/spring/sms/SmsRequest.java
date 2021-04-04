@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 public class SmsRequest {
 
     @NotBlank
-    private final String phoneNumber; // destination
+    private final String phoneNumber;// destination
 
     @NotBlank
     private final String message;

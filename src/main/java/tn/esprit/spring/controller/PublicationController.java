@@ -8,6 +8,8 @@ import tn.esprit.spring.entity.Publication;
 import tn.esprit.spring.service.IPublicationService;
 import tn.esprit.spring.service.IUploadFileService;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 
@@ -31,6 +33,12 @@ public class PublicationController {
         if (uploadFileService.addFile(file)) {
             publicationService.assignAttachementToPost(id, file);
         }
+    }
+    @GetMapping(value = "/getAllPublication")
+    @ResponseBody
+    public List<Publication> getAllPublication() {
+
+        return publicationService.getAllPublication();
     }
 
 
