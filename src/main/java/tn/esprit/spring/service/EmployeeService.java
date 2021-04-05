@@ -15,6 +15,7 @@ import tn.esprit.spring.repository.IemployeeRepository;
 public class EmployeeService implements IEmployeeService {
 	@Autowired
 	IemployeeRepository iemployeeRepository;
+	
 	public long ajouterEmployee(Employee u){
 		iemployeeRepository.save(u); 
 		
