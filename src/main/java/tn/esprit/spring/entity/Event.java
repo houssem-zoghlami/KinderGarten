@@ -11,9 +11,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,10 +47,12 @@ public class Event implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date opening;
 
-	@Temporal(TemporalType.DATE)
-	private Date Duration;
+	private int Duration = 0;
 
 	private int nbrs_Participants = 0;
+	
+	@Lob
+	private byte[] image;
 
 	@Enumerated(EnumType.STRING)
 	private Event_for eventFor;
@@ -67,11 +69,7 @@ public class Event implements Serializable {
 	@ManyToOne
 	private Kindergarten kindergarten;
 
-	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-	private List<Coupon> coupon;
-
 	@OneToOne(mappedBy = "event", cascade = CascadeType.ALL)
-	private Bill bill;
+	private Coupon coupon;
 	
-
 }

@@ -27,6 +27,7 @@ public class ParentController {
 	@PostMapping(value = "/add-parent")
 	@ResponseBody
 	public Parent adParent(@RequestBody Parent parent) {
+
 		iparentservice.addParent(parent);
 		return parent;
 	}
@@ -59,5 +60,34 @@ public class ParentController {
 	public Parent retrieveParent(@PathVariable("parent-id") int parentId) {
 		return iparentservice.retrieveParent(parentId);
 	}
+
+	///////////////////////////////////////////////////////////////// OTHERS////////////////////////////////////////////////////////////////////////////////////////
+
+	// http://localhost:8082/springMVC/servlet/participate-Parent-In-Event/{parent-id}/{event-id}
+	@PutMapping(path = "/participate-Parent-In-Event/{parent-id}/{event-id}")
+	@ResponseBody
+	public int participateParentInEvent(@PathVariable("parent-id") int parentId,
+			@PathVariable("event-id") int eventId) {
+		return iparentservice.participateParentInEvent(parentId, eventId);
+	}
+
+	// http://localhost:8082/springMVC/servlet/unparticipate-Parent-In-Event/{parent-id}/{event-id}
+	@DeleteMapping(path = "/unparticipate-Parent-In-Event/{parent-id}/{event-id}")
+	@ResponseBody
+	public int unparticipateParentInEvent(@PathVariable("parent-id") int parentId,
+			@PathVariable("event-id") int eventId) {
+		return iparentservice.unparticipateParentInEvent(parentId, eventId);
+	}
+	
+
+	// http://localhost:8082/springMVC/servlet/join-kindergarten/{parent-id}/{event-id}/{month-join}
+	@PostMapping(path = "/join-kindergarten/{kindergarten-id}/{parent-id}/{month-join}/{child-id}")
+	@ResponseBody
+	public int joinkindergarten(@PathVariable("parent-id") int parentId,
+			@PathVariable("kindergarten-id") int kindergartenId, @PathVariable("month-join") int monthjoin,@PathVariable("child-id") int childid) {
+		return iparentservice.joinKindergarten(parentId, kindergartenId, monthjoin,childid);
+	}
+
+
 
 }

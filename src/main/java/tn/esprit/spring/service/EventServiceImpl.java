@@ -1,14 +1,18 @@
 package tn.esprit.spring.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.entity.Coupon;
 import tn.esprit.spring.entity.Event;
 import tn.esprit.spring.entity.Event_Activity;
 import tn.esprit.spring.entity.Event_for;
 import tn.esprit.spring.entity.State_event;
+import tn.esprit.spring.repository.CouponRepository;
 import tn.esprit.spring.repository.EventRepository;
 
 @Service
@@ -17,8 +21,15 @@ public class EventServiceImpl implements IEventService {
 	@Autowired
 	EventRepository eventRepository;
 
+	@Autowired
+	CouponRepository couponRepository;
+
+	@Autowired
+	ICouponService icouponService;
+
 	@Override
 	public void addEvent(Event event) {
+		event.setStateEvent(makeState(event.getOpening(), event.getDuration()));
 		eventRepository.save(event);
 	}
 
@@ -40,12 +51,20 @@ public class EventServiceImpl implements IEventService {
 			events.setEventActivity(event.getEventActivity());
 		}
 
-		if (event.getDuration() != null) {
+		if (event.getDuration() != 0) {
 			events.setDuration(event.getDuration());
 		}
 
 		if (event.getEventFor() != null) {
 			events.setEventFor(event.getEventFor());
+		}
+
+		if (event.getImage() != null) {
+			events.setImage(event.getImage());
+		}
+
+		if (event.getStateEvent() != null) {
+			events.setStateEvent(event.getStateEvent());
 		}
 
 		eventRepository.save(events);
@@ -94,6 +113,32 @@ public class EventServiceImpl implements IEventService {
 	public List<Event> getAllEventByActivity(Event_Activity event_Activity) {
 		List<Event> event = (List<Event>) eventRepository.getAllEventByActivity(event_Activity);
 		return event;
+	}
+
+	@Override
+	public Event addCouponInEvent(int id, Coupon coupon) {
+		Event event = eventRepository.findById(id).orElse(null);
+		event.setCoupon(coupon);
+		eventRepository.save(event);
+		return event;
+	}
+
+	@Override
+	public State_event makeState(Date date, int duration) {
+		Date toDay = new Date();
+
+		if (toDay.before(date)) {
+			return State_event.COMING;
+		}
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.HOUR_OF_DAY, duration);
+
+		if (toDay.after(calendar.getTime())) {
+			return State_event.FINISH;
+		}
+		return State_event.IN_PROGRESS;
 	}
 
 }

@@ -23,19 +23,19 @@ public class CouponController {
 
 	///////////////////////////////////////////////////////////////// CRUD////////////////////////////////////////////////////////////////////////////////////////////
 
-	// http://localhost:8082/springMVC/servlet/add-coupon
-	@PostMapping(value = "/add-coupon")
+	// http://localhost:8082/springMVC/servlet/add-coupon/{event-id}
+	@PostMapping(value = "/add-coupon/{event-id}")
 	@ResponseBody
-	public Coupon adCoupon(@RequestBody Coupon coupon) {
-		icouponservice.addCoupon(coupon);
-		return coupon;
+	public int adCoupon(@PathVariable("event-id") int eventId, @RequestBody Coupon coupon) {
+		icouponservice.addCoupon(coupon,eventId);
+		return 1;
 	}
 
 	// http://localhost:8082/springMVC/servlet/modify-Coupon/{coupon-id}
 	@PutMapping("/modify-coupon/{coupon-id}")
 	@ResponseBody
-	public Coupon modifyCoupon(@PathVariable("coupon-id") int eventId, @RequestBody Coupon coupon) {
-		return icouponservice.updateCoupon(eventId, coupon);
+	public Coupon modifyCoupon(@PathVariable("coupon-id") int couponId, @RequestBody Coupon coupon) {
+		return icouponservice.updateCoupon(couponId, coupon);
 	}
 
 	// http://localhost:8082/springMVC/servlet/delete-coupon/{coupon-id}
@@ -69,4 +69,10 @@ public class CouponController {
 		return icouponservice.CountCouponByEvent(id);
 	}
 
+	// http://localhost:8082/springMVC/servlet/add-coupon-nbrs/{id-coupon}	
+	@PutMapping("/add-coupon-nbrs/{id-coupon}")
+	@ResponseBody
+	public int addCouponNbrs(@PathVariable("id-coupon") int id) {
+		return icouponservice.addCouponNbrs(id);
+	}
 }

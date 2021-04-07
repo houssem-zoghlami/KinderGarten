@@ -2,22 +2,20 @@ package tn.esprit.spring.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Entity
 @Data
@@ -29,16 +27,25 @@ public class Bill implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id_bill;
+	private int id_bill;
 
 	@Temporal(TemporalType.DATE)
 	private Date date_bill;
 
-	private float total_costs;
-
-	@OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
-	private List<Coupon> coupon;
+	private float discount = 0;
 	
-	@OneToOne
-	private Event event;
+	private float Nbrs_month = 1;
+
+	private double total_costs;
+
+	private double tax = 0.2;
+
+	@Enumerated(EnumType.STRING)
+	private Payment payment;
+
+	@ManyToOne
+	private Parent parent;
+
+	@ManyToOne
+	private Kindergarten kindergarten;
 }

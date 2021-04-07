@@ -27,12 +27,20 @@ public class Kindergarten extends User implements Serializable {
 	private String description;
 	private String address;
 	private int nombreemploye;
+	private double price_month=0;
+	private double discount=0;
+	
+	@Lob
+	private byte[] image;
 
 	@OneToMany(mappedBy = "kindergarten", cascade = CascadeType.ALL)
 	private List<Event> event;
 	
 	@OneToMany(mappedBy ="kindergarten",cascade = CascadeType.ALL)
 	private List<Child> child;
+	
+	@OneToMany(mappedBy ="kindergarten",cascade = CascadeType.ALL)
+	private List<Bill> bill;
 	
 	// @ManyToMany(cascade = CascadeType.ALL)
 	// private List<User> user;

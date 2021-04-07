@@ -10,9 +10,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -22,7 +22,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,7 +35,10 @@ public class Parent extends User implements Serializable {
 	private String email;
 	private String address;
 	private int phone;
-
+	
+	@Lob
+	private byte[] image;
+	
 	@Enumerated(EnumType.STRING)
 	private Genders gender;
 
@@ -48,9 +51,7 @@ public class Parent extends User implements Serializable {
 	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
 	private List<Child> child;
 
-	@OneToOne(mappedBy = "parent", cascade = CascadeType.ALL)
-	private Coupon coupon;
-
-
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+	private List<Bill> bill;
 
 }

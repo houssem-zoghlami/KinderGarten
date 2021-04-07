@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entity.Coupon;
+import tn.esprit.spring.entity.Event;
 import tn.esprit.spring.repository.CouponRepository;
 
 @Service
@@ -14,10 +15,16 @@ public class CouponServiceImpl implements ICouponService {
 
 	@Autowired
 	CouponRepository couponRepository;
+	
+	@Autowired
+	IEventService ieventService;
 
 	@Override
-	public void addCoupon(Coupon coupon) {
+	public void addCoupon(Coupon coupon,int idEvent) {
+		
 		Date toDay = new Date();
+		Event event = ieventService.retrieveEvent(idEvent);
+		coupon.setEvent(event);
 		coupon.setDate_coupon(toDay);
 		couponRepository.save(coupon);
 	}
@@ -56,15 +63,18 @@ public class CouponServiceImpl implements ICouponService {
 	}
 
 	@Override
-	public Coupon getCouponByEventAndParent(int id_parent, int id_event) {
-		Coupon coupon = couponRepository.getCouponByEventAndParent(id_parent, id_event);
-		return coupon;
-	}
-
-	@Override
 	public int CountCouponByEvent(int id_event) {
 		int countCoupon = couponRepository.CountCouponByEvent(id_event);
 		return countCoupon;
+	}
+
+	@Override
+	public int addCouponNbrs(int id) {
+		Coupon coupon = couponRepository.findById(id).orElse(null);
+		int nbrs = coupon.getNbrs_coupon();
+		coupon.setNbrs_coupon(nbrs+1);
+		couponRepository.save(coupon);
+		return nbrs;
 	}
 
 }

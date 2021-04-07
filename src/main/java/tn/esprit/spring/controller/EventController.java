@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.esprit.spring.entity.Coupon;
 import tn.esprit.spring.entity.Event;
 import tn.esprit.spring.entity.Event_Activity;
 import tn.esprit.spring.entity.Event_for;
@@ -94,6 +95,22 @@ public class EventController {
 	public int getEventsCount(@PathVariable("id-event") int id) {
 
 		return ieventservice.countParent(id);
+	}
+
+	// http://localhost:8082/springMVC/servlet/add-coupon-in-event/{event-id}
+	@PutMapping("/add-coupon-in-event/{event-id}")
+	@ResponseBody
+	public Event addCouponInEvent(@PathVariable("event-id") int eventId, @RequestBody Coupon coupon) {
+		return ieventservice.addCouponInEvent(eventId, coupon);
+	}
+
+	// http://localhost:8082/springMVC/servlet/change-state-event/{event-id}
+	@PutMapping("/change-state-event/{event-id}")
+	@ResponseBody
+	public Event changeStateEvent(@PathVariable("event-id") int eventId) {
+		Event event = ieventservice.retrieveEvent(eventId);
+		event.setStateEvent(ieventservice.makeState(event.getOpening(), event.getDuration()));
+		return ieventservice.updateEvent(eventId, event);
 	}
 
 }

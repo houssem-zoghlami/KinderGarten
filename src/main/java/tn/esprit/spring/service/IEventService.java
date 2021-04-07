@@ -1,8 +1,9 @@
 package tn.esprit.spring.service;
 
-
+import java.util.Date;
 import java.util.List;
 
+import tn.esprit.spring.entity.Coupon;
 import tn.esprit.spring.entity.Event;
 import tn.esprit.spring.entity.Event_Activity;
 import tn.esprit.spring.entity.Event_for;
@@ -29,5 +30,9 @@ public interface IEventService {
 	public List<Event> getAllEventByFor(Event_for event_for);
 
 	public List<Event> getAllEventByActivity(Event_Activity event_Activity);
+
+	public Event addCouponInEvent(int id, Coupon coupon);
+
+	public State_event makeState(Date date, int duration);
 
 }

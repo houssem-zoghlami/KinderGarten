@@ -22,14 +22,14 @@ public class Child implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id_child;
+	private int id_child;
+	
 	private String firstname;
 	private String lastname;
 	
 	@Enumerated(EnumType.STRING)
 	private Genders gender;
-	
-	private boolean subscribe;
+
 	private int age;
 	@Temporal(TemporalType.DATE)
 	private Date date;

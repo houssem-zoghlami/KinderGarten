@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,21 +26,15 @@ public class Coupon implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id_coupon;
+	private int id_coupon;
 
-	private int price=0;
-	private int nbrs_coupon=0;
+	private int price = 0;
+
+	private int nbrs_coupon = 0;
 
 	@Temporal(TemporalType.DATE)
 	private Date date_coupon;
 
-	@ManyToOne
-	private Event event;
-
-	@ManyToOne
-	private Bill bill;
-
 	@OneToOne
-	private Parent parent;
-
+	private Event event;
 }

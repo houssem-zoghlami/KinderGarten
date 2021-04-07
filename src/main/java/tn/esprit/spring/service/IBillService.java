@@ -4,11 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import tn.esprit.spring.entity.Bill;
+import tn.esprit.spring.entity.Kindergarten;
 
 
 public interface IBillService {
 	
-	public void addBill(Bill bill);
+	public Bill addBill(int month, int id_kindergarten, int id_parent);
 
 	public void deleteBill(int id);
 
@@ -19,5 +20,7 @@ public interface IBillService {
 	public List<Bill> retrieveAllBills();
 
 	public List<Bill> getAllBillByDate(Date date);
+	
+	public double calculBill(Kindergarten kindergarten,Bill bill);
 	
 }
