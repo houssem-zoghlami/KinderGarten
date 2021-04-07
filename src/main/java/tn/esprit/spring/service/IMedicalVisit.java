@@ -6,11 +6,12 @@ import tn.esprit.spring.entity.MedicaleVisit;
 
 public interface IMedicalVisit {
 	
-	public void add(MedicaleVisit medicalVisitKinderGarten);
+	public MedicaleVisit save(MedicaleVisit m);
+	public List<MedicaleVisit> saveall(List<MedicaleVisit> m);
 
-	public void remove(int id);
+	public String remove(int id);
 
-	public void update(MedicaleVisit m);
+	public MedicaleVisit update(MedicaleVisit m);
 
 	public List<MedicaleVisit> getall();
 

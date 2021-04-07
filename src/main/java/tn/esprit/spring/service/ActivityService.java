@@ -46,12 +46,12 @@ public class ActivityService {
 	}
 	
 	//update
-//	public Activity  updateActivity(Activity activity){
-		//Activity existingActivity = iActivityRepository.findById(Activity.getId());
-//	existingActivity.setName(Activity.getName);
-	//	existingActivity.setActivityType(Activity.getActivityType());
-	//	existingActivity.setActivityDate(Activity.getActivityDate());
-	//	return iActivityRepository.save(existingActivity);
+public Activity  updateActivity(Activity activity){
+		Activity existingActivity = iActivityRepository.findById(activity.getId()).orElse(null);
+	existingActivity.setName(activity.getName());
+		existingActivity.setActivityType(activity.getActivityType());
+		existingActivity.setActivityDate(activity.getActivityDate());
+		return iActivityRepository.save(existingActivity);
 		
-	//}
+	}
 }

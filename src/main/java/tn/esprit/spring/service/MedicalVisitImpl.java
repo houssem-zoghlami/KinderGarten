@@ -14,33 +14,52 @@ public class MedicalVisitImpl implements IMedicalVisit{
 	
 //post
 	@Override
-	public void add(MedicaleVisit m) {
-		medicalvisitRepository.save(m);
+	public MedicaleVisit save(MedicaleVisit m) {//create one
+		return medicalvisitRepository.save(m);
+	}
+	
+	@Override
+	public List<MedicaleVisit> saveall(List<MedicaleVisit> m){//create list of medical visit
+		return medicalvisitRepository.saveAll(m);
 		
 	}
+	
+	
+	//get
+		@Override
+		public List<MedicaleVisit> getall(){
+			return  medicalvisitRepository.findAll();
+		}
+
+		@Override
+		public MedicaleVisit getByid(int id){ //get by id
+			return  medicalvisitRepository.findById(id).orElse(null);
+		
+	}
+		
+		
+		
 //delete
 	@Override
-	public void remove(int id) {
+	public String remove(int id) {
 		medicalvisitRepository.deleteById(id);
+		return "medical visit removed"+id;
+		
+	
 		
 	}
 //put
 	@Override
-	public void update(MedicaleVisit m) {
-		medicalvisitRepository.save(m);
+	public MedicaleVisit update(MedicaleVisit m) {
+		MedicaleVisit mr=medicalvisitRepository.findById(m.getId()).orElse(null);
+		mr.setDateEnd(m.getDateEnd());
+		mr.setDateStart(m.getDateStart());
+		mr.setDoctor(m.getDoctor());
+		return medicalvisitRepository.save(mr);
+		
 		
 	}
-//get
-	@Override
-	public List<MedicaleVisit> getall(){
-		return  medicalvisitRepository.findAll();
-	}
 
-	@Override
-	public MedicaleVisit getByid(int id){ //get by id
-		return  medicalvisitRepository.findById(id).orElse(null);
-	
-}
 	
 	
 

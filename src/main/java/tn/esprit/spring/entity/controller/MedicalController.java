@@ -1,5 +1,7 @@
 package tn.esprit.spring.entity.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,11 +28,34 @@ public class MedicalController  {
 	
 	@PostMapping("/addvisit")
 	@ResponseBody
-	public void addMedicalVisit(@RequestBody MedicaleVisit m) {
+	public MedicaleVisit addMedicalVisit(@RequestBody MedicaleVisit m) {
 
-		medicalVisit.add(m);
+		return medicalVisit.save(m);
 	}
 	
+	@PostMapping("/addvisits")
+	@ResponseBody
+	public List<MedicaleVisit> addMedicalVisits(@RequestBody List<MedicaleVisit> m) {
+
+		return medicalVisit.saveall(m);
+	}
+	
+	//get
+	
+	@GetMapping("/getVisits")
+	@ResponseBody
+	public List<MedicaleVisit> getallVisit(){
+		return medicalVisit.getall();
+	}
+	
+	
+	@GetMapping("/getVisit/{id}")
+	@ResponseBody
+	public MedicaleVisit getid(@PathVariable int id){
+		return medicalVisit.getByid(id);
+	}
+	
+	//put 
 	
 	@PutMapping("/updatevisit")
 	@ResponseBody
@@ -38,7 +63,7 @@ public class MedicalController  {
 		medicalVisit.update(m);
 		
 	}
-	
+	//delete
 	
 	@DeleteMapping("/deletevisit/{id}")
 	@ResponseBody
@@ -46,20 +71,6 @@ public class MedicalController  {
 		medicalVisit.remove(id);
 		
 	}
-	
-	@GetMapping("/getVisits")
-	@ResponseBody
-	public void getVisit(){
-		medicalVisit.getall();
-	}
-	
-	
-	@GetMapping("/getVisit/{id}")
-	@ResponseBody
-	public void getVisit(@PathVariable int id){
-		medicalVisit.getByid(id);
-	}
-	
 	
 
 }

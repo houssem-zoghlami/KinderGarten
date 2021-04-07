@@ -50,10 +50,10 @@ public class ActivityController {
 	 }
 	
 	//put
-	//@PutMapping("/update")
-	//public Activity updateProduct(@RequestBody Activity activity){
-		//return activityService.Updateactivity(activity);
-	//}
+	@PutMapping("/update")
+	public Activity updateProduct(@RequestBody Activity activity){
+		return activityService.updateActivity(activity);
+	}
 	
 	//delete
 	@DeleteMapping("/delete/{id}")
