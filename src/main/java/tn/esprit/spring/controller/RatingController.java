@@ -15,9 +15,8 @@ public class RatingController {
 	RatingService ratingService;
 	
 	@PostMapping("/add-rating/{id}")
-	public String addRating(@PathVariable("id") int id) {
-	return ratingService.addRating(id);
-	//return rating;
+	public String addRating(Rating r,@PathVariable("id") int id) throws Exception {
+	return ratingService.addRating(r,id);
 	 }
 	
 	@GetMapping(value ="/retrieve-all-ratings")

@@ -8,12 +8,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="T_Publicity")
+@Table(name="publicity")
 
 public class Publicity implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -32,6 +33,8 @@ public class Publicity implements Serializable{
 	@JsonIgnore
 	private User user;
 	
-	
+	@JsonIgnore
+	@OneToMany(cascade =CascadeType.ALL,mappedBy ="publicity")
+	private Set<Rating> ratings;
 
 }

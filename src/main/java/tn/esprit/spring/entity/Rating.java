@@ -1,5 +1,6 @@
 package tn.esprit.spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,25 +18,28 @@ import static javax.persistence.FetchType.LAZY;
 @Table(name = "rating")
 public class Rating implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-    
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
-
-	@ManyToOne
-	Publicity publicity;
-	@ManyToOne(fetch = LAZY)
-	@JoinColumn(name = "userId", referencedColumnName = "userId")
-	private User user;
-
-
 	@Temporal(TemporalType.DATE)
 	private Date dateRating;
 
 	private Integer note;
 
 	private String review;
+	@ManyToOne
+	@JsonIgnore
+	private User user;
+
+
+
+
+	@ManyToOne(fetch = LAZY)
+	private Publicity publicity;
+
+
+
+
 
 }

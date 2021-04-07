@@ -48,13 +48,11 @@ public class RatingService implements IRatingService {
 	}
 
 
-	public String addRating(int id) {
+	public String addRating(Rating r ,int id) throws Exception{
 		Publicity p = publicityRepository.findById(id).orElse(null);
-		p.setUser(getCurrentUser());
-         Rating r=new Rating();
+		r.setUser(getCurrentUser());
+		r.setPublicity(p);
 		r.setDateRating(new Date());
-		r.setReview(r.getReview());
-		r.setNote(r.getNote());
 		RatingRepository.save(r);
 		return "note enregistré";
 	}
@@ -75,10 +73,6 @@ public class RatingService implements IRatingService {
 		return "note enregistré";
 	}
 
-	@Override
-	public String addRating(Rating r) {
-		return null;
-	}
 
 	@Override
 	public void deleteRating(int i) {

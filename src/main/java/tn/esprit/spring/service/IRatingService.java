@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IRatingService {
 
-	public String addRating(Rating r);
+	public String addRating(Rating r ,int id) throws Exception;
 
 	public void deleteRating(int i);
 
