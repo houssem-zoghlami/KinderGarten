@@ -9,6 +9,6 @@ import tn.esprit.spring.entity.Activity;
 
 public interface IActivityRepository extends JpaRepository<Activity, Integer> {
 
-	Activity findByName(String name);
-
+	
+	Activity findById(int id);
 }

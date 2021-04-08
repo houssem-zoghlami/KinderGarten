@@ -42,12 +42,9 @@ public class ActivityController {
 	 }
 	@GetMapping("/activity/{id}")
 	 public Activity findProductById(@PathVariable int id){
-		 return activityService.getActivityByid(id);
+		 return activityService.getById(id);
 	 }
-	@GetMapping("/activity/{name}")
-	 public Activity findActivityByName(@PathVariable String name){
-		 return activityService.getActivityByName(name);
-	 }
+	
 	
 	//put
 	@PutMapping("/update")
