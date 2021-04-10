@@ -53,6 +53,14 @@ public class RatingService implements IRatingService {
 		r.setUser(getCurrentUser());
 		r.setPublicity(p);
 		r.setDateRating(new Date());
+		if (r.getNote()>5  ||r.getNote()<0 )
+
+		{
+
+			return "il faut saisir une note comprise entre 0 et 5 ";
+
+		}
+		
 		RatingRepository.save(r);
 		return "note enregistré";
 	}
@@ -64,7 +72,9 @@ public class RatingService implements IRatingService {
 
 		rating = RatingRepository.findById(id);
 
-		// rating.setNote(note);
+		//rating.setNote(note);
+
+
 
 		// rating.setNote(5);
 		rating.setDateRating(new Date());
