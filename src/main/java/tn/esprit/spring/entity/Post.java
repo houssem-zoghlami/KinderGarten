@@ -26,40 +26,9 @@ public class Post implements Serializable {
     private long id;
     private String contained;
     private Integer likeCount = 0;
-    
-//  @ManyToOne
-//  User user;
+
+//    @ManyToOne
+//     User user;
 //
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getContained() {
-		return contained;
-	}
-	public void setContained(String contained) {
-		this.contained = contained;
-	}
-	public Integer getLikeCount() {
-		return likeCount;
-	}
-	public void setLikeCount(Integer likeCount) {
-		this.likeCount = likeCount;
-	}
-	public Post(long id, String contained, Integer likeCount) {
-		super();
-		this.id = id;
-		this.contained = contained;
-		this.likeCount = likeCount;
-	}
-	public Post() {
-		super();
-	}
-
-
-    
-    
 
 }

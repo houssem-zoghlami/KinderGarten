@@ -56,9 +56,12 @@ public class Bill implements Serializable {
 	private Kindergarten kindergarten;
 
 
+
 	
 	
 	
 	
 	
+
+
 }
