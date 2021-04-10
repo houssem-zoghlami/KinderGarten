@@ -15,12 +15,18 @@ import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+
+
 public class Bill implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -49,95 +55,9 @@ public class Bill implements Serializable {
 	@ManyToOne
 	private Kindergarten kindergarten;
 
-	public int getId_bill() {
-		return id_bill;
-	}
 
-	public void setId_bill(int id_bill) {
-		this.id_bill = id_bill;
-	}
-
-	public Date getDate_bill() {
-		return date_bill;
-	}
-
-	public void setDate_bill(Date date_bill) {
-		this.date_bill = date_bill;
-	}
-
-	public float getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(float discount) {
-		this.discount = discount;
-	}
-
-	public float getNbrs_month() {
-		return Nbrs_month;
-	}
-
-	public void setNbrs_month(float nbrs_month) {
-		Nbrs_month = nbrs_month;
-	}
-
-	public double getTotal_costs() {
-		return total_costs;
-	}
-
-	public void setTotal_costs(double total_costs) {
-		this.total_costs = total_costs;
-	}
-
-	public double getTax() {
-		return tax;
-	}
-
-	public void setTax(double tax) {
-		this.tax = tax;
-	}
-
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-
-	public Parent getParent() {
-		return parent;
-	}
-
-	public void setParent(Parent parent) {
-		this.parent = parent;
-	}
-
-	public Kindergarten getKindergarten() {
-		return kindergarten;
-	}
-
-	public void setKindergarten(Kindergarten kindergarten) {
-		this.kindergarten = kindergarten;
-	}
-
-	public Bill(int id_bill, Date date_bill, float discount, float nbrs_month, double total_costs, double tax,
-			Payment payment, Parent parent, Kindergarten kindergarten) {
-		super();
-		this.id_bill = id_bill;
-		this.date_bill = date_bill;
-		this.discount = discount;
-		Nbrs_month = nbrs_month;
-		this.total_costs = total_costs;
-		this.tax = tax;
-		this.payment = payment;
-		this.parent = parent;
-		this.kindergarten = kindergarten;
-	}
-
-	public Bill() {
-		super();
-	}
+	
+	
 	
 	
 	
