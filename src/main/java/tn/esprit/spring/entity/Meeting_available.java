@@ -42,6 +42,9 @@ public class Meeting_available implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	private Meeting_type meetingtype;
+	
+	@Enumerated(EnumType.STRING)
+	private Meeting_state meetingstate;
 
 	@ManyToOne
 	private Kindergarten kindergarten;
