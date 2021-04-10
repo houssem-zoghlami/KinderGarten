@@ -32,8 +32,58 @@ public class User implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	private Date dateInscription;
-
+	
+	
 	// @OneToMany(cascade = CascadeType.ALL,mappedBy="post")
-	// private List<Post> post;
+		// private List<Post> post;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Date getDateInscription() {
+		return dateInscription;
+	}
+
+	public void setDateInscription(Date dateInscription) {
+		this.dateInscription = dateInscription;
+	}
+
+	public User(int id, String password, Role role, Date dateInscription) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.role = role;
+		this.dateInscription = dateInscription;
+	}
+
+	public User() {
+		super();
+	}
+
+	
+	
+	
+	
 
 }

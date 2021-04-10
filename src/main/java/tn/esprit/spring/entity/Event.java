@@ -71,5 +71,128 @@ public class Event implements Serializable {
 
 	@OneToOne(mappedBy = "event", cascade = CascadeType.ALL)
 	private Coupon coupon;
+
+	public int getId_event() {
+		return id_event;
+	}
+
+	public void setId_event(int id_event) {
+		this.id_event = id_event;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Date getOpening() {
+		return opening;
+	}
+
+	public void setOpening(Date opening) {
+		this.opening = opening;
+	}
+
+	public int getDuration() {
+		return Duration;
+	}
+
+	public void setDuration(int duration) {
+		Duration = duration;
+	}
+
+	public int getNbrs_Participants() {
+		return nbrs_Participants;
+	}
+
+	public void setNbrs_Participants(int nbrs_Participants) {
+		this.nbrs_Participants = nbrs_Participants;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+	public Event_for getEventFor() {
+		return eventFor;
+	}
+
+	public void setEventFor(Event_for eventFor) {
+		this.eventFor = eventFor;
+	}
+
+	public Event_Activity getEventActivity() {
+		return eventActivity;
+	}
+
+	public void setEventActivity(Event_Activity eventActivity) {
+		this.eventActivity = eventActivity;
+	}
+
+	public State_event getStateEvent() {
+		return stateEvent;
+	}
+
+	public void setStateEvent(State_event stateEvent) {
+		this.stateEvent = stateEvent;
+	}
+
+	public List<Parent> getParent() {
+		return parent;
+	}
+
+	public void setParent(List<Parent> parent) {
+		this.parent = parent;
+	}
+
+	public Kindergarten getKindergarten() {
+		return kindergarten;
+	}
+
+	public void setKindergarten(Kindergarten kindergarten) {
+		this.kindergarten = kindergarten;
+	}
+
+	public Coupon getCoupon() {
+		return coupon;
+	}
+
+	public void setCoupon(Coupon coupon) {
+		this.coupon = coupon;
+	}
+
+	public Event(int id_event, String title, Date opening, int duration, int nbrs_Participants, byte[] image,
+			Event_for eventFor, Event_Activity eventActivity, State_event stateEvent, List<Parent> parent,
+			Kindergarten kindergarten, Coupon coupon) {
+		super();
+		this.id_event = id_event;
+		this.title = title;
+		this.opening = opening;
+		Duration = duration;
+		this.nbrs_Participants = nbrs_Participants;
+		this.image = image;
+		this.eventFor = eventFor;
+		this.eventActivity = eventActivity;
+		this.stateEvent = stateEvent;
+		this.parent = parent;
+		this.kindergarten = kindergarten;
+		this.coupon = coupon;
+	}
+
+	public Event() {
+		super();
+	}
+	
+	
+	
+	
+	
 	
 }
