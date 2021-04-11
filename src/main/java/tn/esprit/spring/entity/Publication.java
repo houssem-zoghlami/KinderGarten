@@ -8,18 +8,13 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class Publication implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,16 +22,19 @@ public class Publication implements Serializable {
 
 	private LocalDateTime date;
 	private String description;
-	private int numberLike;
 	private String attachment;
+	private LocalDateTime modifyDate;
+	private Integer voteCount = 0;
+
 
 
 	@ManyToOne
 	@JsonIgnore
 	private User user;
 
-	@OneToMany(mappedBy = "publication")
-	private List<Comment> listComments = new ArrayList<Comment>();
 
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "publication")
+	private Set<Comment> comments;
 
 }

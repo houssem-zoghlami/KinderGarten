@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -13,26 +16,31 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name= "comment")
 public class Comment implements Serializable{
 
-	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name= "id")
 	private int idComment;
-	@Column(name="commentContent")
-	private String commentContent;
 	@Column(name= "createDate")
 	private LocalDateTime createDate;
+	@NotNull
+	@Lob
+	private String text;
+
+
 	@Column(name= "modifyDate")
 	private LocalDateTime modifyDate;
+	@ManyToOne
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name= "id_publication")
+	private User user;
+
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "Publication_id", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
 	private Publication publication;
-
-
 
 
 

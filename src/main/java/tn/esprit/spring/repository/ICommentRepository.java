@@ -7,9 +7,9 @@ import tn.esprit.spring.entity.Comment;
 @Repository
 public interface ICommentRepository  extends CrudRepository<Comment,Integer > {
 
-	
-	
 
-	
-	
+
+
+
+
 }

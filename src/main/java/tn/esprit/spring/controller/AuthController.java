@@ -16,6 +16,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor
+
 public class AuthController {
     @Autowired
     UserRepository userRepository;

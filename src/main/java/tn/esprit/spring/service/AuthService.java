@@ -49,20 +49,23 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setCreated(Instant.now());
         user.setEnabled(false);
-        user.setPhoneNumber(user.getPhoneNumber());
+        user.setPhoneNumber(registerRequest.getPhoneNumber());
+        user.setAddress(registerRequest.getAddress());
+        user.setBirthday(registerRequest.getBirthday());
+        user.setRole(registerRequest.getRole());
 
         userRepository.save(user);
 
         String token = generateVerificationToken(user);
-        smsSender.sendSms(new SmsRequest("","hello please " +
-                "please click on the below url to activate your account: " +
-                "http://localhost:8081/api/auth/accountVerification/" + token));
+//        smsSender.sendSms(new SmsRequest("",
+//                "please click on the below url to activate your account: " +
+//                "http://localhost:9130/api/auth/accountVerification/" + token));
 
 
         mailService.sendMail(new NotificationEmail("Please Activate your Account.", user.getEmail(),
-                "Thank you for signing up to our Forum, " +
+                "Thank you for signing up to our Site : Welcome to KinderGarten " +
                         "please click on the below url to activate your account : " +
-                        "http://localhost:8081/api/auth/accountVerification/" + token));
+                        "http://localhost:9130/api/auth/accountVerification/" + token));
     }
 
     private String generateVerificationToken(User user) {
@@ -134,12 +137,11 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(resetPassword.getPassword()));
 
         userRepository.save(user);
-        smsSender.sendSms(new SmsRequest("","password reset successful: thank you" + "" +
-                "your new password is "+ passwordEncoder.upgradeEncoding(user.getPassword())));
+//        smsSender.sendSms(new SmsRequest("","password reset successful: thank you" + "" +
+//                "your new password is "+ (user.getPassword())));
 
         mailService.sendMail(new NotificationEmail("Reset password .", user.getEmail(),
-                        " password reset successful: thank you "
-                         + user.getUsername()));
+                        " password reset successful: thank you you new password is "));
     }
 //    public void changepwdnonloggedinuser(RegisterRequest registerRequest) {
 //        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
