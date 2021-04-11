@@ -2,112 +2,74 @@ package tn.esprit.spring.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import tn.esprit.spring.entity.Event_for;
+import tn.esprit.spring.entity.Event_Activity;
+import tn.esprit.spring.entity.State_event;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Getter
+@Setter
 public class Event implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1496106056885440532L;
+
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
-	private int id;
-	
-	private String Title;
-	
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id_event;
+
+	private String title;
+
 	@Temporal(TemporalType.DATE)
 	private Date opening;
+
+	private int Duration = 0;
+
+	private int nbrs_Participants = 0;
 	
-	@Temporal(TemporalType.DATE)
-	private Date Duration;
-	
-	private int nbrs_participants;
-	private Event_for event_For;
-	private Event_Activity event_Activity;
+	@Lob
+	private byte[] image;
+
+	@Enumerated(EnumType.STRING)
+	private Event_for eventFor;
+
+	@Enumerated(EnumType.STRING)
+	private Event_Activity eventActivity;
+
+	@Enumerated(EnumType.STRING)
+	private State_event stateEvent;
 
 	@ManyToMany
-	Parent parent;
-	@ManyToMany 
-	Kindergarten kindergarten;
-	
-	public int getId() {
-		return id;
-	}
+	private List<Parent> parent;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	@ManyToOne
+	private Kindergarten kindergarten;
 
-	public String getTitle() {
-		return Title;
-	}
-
-	public void setTitle(String title) {
-		Title = title;
-	}
-
-	public Date getOpening() {
-		return opening;
-	}
-
-	public void setOpening(Date opening) {
-		this.opening = opening;
-	}
-
-	public Date getDuration() {
-		return Duration;
-	}
-
-	public void setDuration(Date duration) {
-		Duration = duration;
-	}
-
-	public int getNbrs_participants() {
-		return nbrs_participants;
-	}
-
-	public void setNbrs_participants(int nbrs_participants) {
-		this.nbrs_participants = nbrs_participants;
-	}
-
-	public Event_for getEvent_For() {
-		return event_For;
-	}
-
-	public void setEvent_For(Event_for event_For) {
-		this.event_For = event_For;
-	}
-
-	public Event_Activity getEvent_Activity() {
-		return event_Activity;
-	}
-
-	public void setEvent_Activity(Event_Activity event_Activity) {
-		this.event_Activity = event_Activity;
-	}
-
-	public Event(int id, String title, Date opening, Date duration, int nbrs_participants, Event_for event_For,
-			Event_Activity event_Activity) {
-		super();
-		this.id = id;
-		Title = title;
-		this.opening = opening;
-		Duration = duration;
-		this.nbrs_participants = nbrs_participants;
-		this.event_For = event_For;
-		this.event_Activity = event_Activity;
-	}
-
-	public Event() {
-		super();
-	}
-	
-	 
+	@OneToOne(mappedBy = "event", cascade = CascadeType.ALL)
+	private Coupon coupon;
 	
 }

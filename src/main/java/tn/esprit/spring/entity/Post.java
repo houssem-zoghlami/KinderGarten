@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
-import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,7 +17,11 @@ import javax.persistence.*;
 @Setter
 
 public class Post implements Serializable {
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
     private String contained;
