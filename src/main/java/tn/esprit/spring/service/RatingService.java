@@ -60,7 +60,7 @@ public class RatingService implements IRatingService {
 			return "il faut saisir une note comprise entre 0 et 5 ";
 
 		}
-		
+
 		RatingRepository.save(r);
 		return "note enregistré";
 	}
