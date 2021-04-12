@@ -42,6 +42,9 @@ public class Child implements Serializable {
 	private Parent parent;
 	@ManyToOne
 	private Kindergarten kindergarten;
+	
+	@OneToOne
+	private MedicalRec MedicalRec;
 
 
 	
