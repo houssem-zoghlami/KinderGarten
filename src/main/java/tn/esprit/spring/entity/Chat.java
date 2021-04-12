@@ -15,7 +15,6 @@ import javax.persistence.Table;
 
 @Table(name = "chat")
 @Entity
-//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Chat implements Serializable {
 
 	private static final long serialVersionUID = 1L;

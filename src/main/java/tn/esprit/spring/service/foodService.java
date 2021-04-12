@@ -15,6 +15,7 @@ import tn.esprit.spring.entity.callories;
 import tn.esprit.spring.entity.foodmedrecwithgramage;
 import tn.esprit.spring.repository.ChildRepository;
 import tn.esprit.spring.repository.FoodmedrecwithgramageRepository;
+import tn.esprit.spring.repository.MedRecRepository;
 import tn.esprit.spring.repository.foodRepository;
 
 
@@ -24,6 +25,9 @@ public class foodService implements IfoodService {
 	ChildRepository child;
 	@Autowired
 	foodRepository food;
+	@Autowired
+	MedRecRepository medrec;
+	
 	
 	 @Autowired
 	 FoodmedrecwithgramageRepository foodgrammage;
@@ -44,7 +48,7 @@ public class foodService implements IfoodService {
 		     float vluecaloriesofonemed=cal.getValue();
 	          float valueofcaloryofonefood=(float)Float.parseFloat(onefood.getValue());
 		     
-		     float xvalue=vluecaloriesofonemed/valueofcaloryofonefood;
+		     float xvalue=vluecaloriesofonemed/valueofcaloryofonefood;//quantity needed/quantity offered
 			//date
 			Date date = new Date();
 	           String strDateFormat = "yyyy-MM-dd hh:mm:ss";
@@ -52,40 +56,40 @@ public class foodService implements IfoodService {
 	           String formattedDate= dateFormat.format(date);
 	           Date date1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(formattedDate);
 	           
-	           if(idofmenucategory==1){
-	        	   if( xvalue==1)
+	           if(idofmenucategory==1){   //allergy/Gluten
+	        	   if( xvalue==1)  //normal
 		        	{
 		        	fb.setFoodsandtheircallories(onefood);
-		        	fb.setGramsneeded(10+100);
+		        	fb.setGramsneeded(100);
 		        	fb.setMedicalRec(onemed);
 		        	fb.setPublishedDate(date1);
 		        	foodgrammage.save(fb);	
 		        	} 
-	        	   else if(xvalue < 1)   //n9es
+	        	   else if(xvalue < 1)   //-
 		           {
 		        	   fb.setFoodsandtheircallories(onefood);
-			        	fb.setGramsneeded(100/xvalue+10);
+			        	fb.setGramsneeded(120);
 			        	fb.setMedicalRec(onemed);
 			        	fb.setPublishedDate(date1);
 			        	foodgrammage.save(fb);	
 		        	   
 		           }
-		           else if(xvalue >1) //zied
+		           else if(xvalue >1) //+
 		           {
 		        	   fb.setFoodsandtheircallories(onefood);
-			        	fb.setGramsneeded(100*xvalue+10);
+			        	fb.setGramsneeded(80);
 			        	fb.setMedicalRec(onemed);
 			        	fb.setPublishedDate(date1);
 			        	foodgrammage.save(fb);	
 		        	   
 		           }
 		           }
-		           else if (idofmenucategory ==2)
+		           else if (idofmenucategory ==2) //medical_treatment
 		           {
 		        	   if( xvalue==1)
 			        	{
 			        	fb.setFoodsandtheircallories(onefood);
-			        	fb.setGramsneeded(100-10);
+			        	fb.setGramsneeded(100);
 			        	fb.setMedicalRec(onemed);
 			        	fb.setPublishedDate(date1);
 			        	foodgrammage.save(fb);	
@@ -94,7 +98,7 @@ public class foodService implements IfoodService {
 			           else if(xvalue < 1)
 			           {
 			        	   fb.setFoodsandtheircallories(onefood);
-				        	fb.setGramsneeded(100/xvalue-10);
+				        	fb.setGramsneeded(120);
 				        	fb.setMedicalRec(onemed);
 				        	fb.setPublishedDate(date1);
 				        	foodgrammage.save(fb);	
@@ -103,14 +107,14 @@ public class foodService implements IfoodService {
 			           else if(xvalue >1)
 			           {
 			        	   fb.setFoodsandtheircallories(onefood);
-				        	fb.setGramsneeded(100*xvalue-10);
+				        	fb.setGramsneeded(80);
 				        	fb.setMedicalRec(onemed);
 				        	fb.setPublishedDate(date1);
 				        	foodgrammage.save(fb);	
 			        	   
 			           } 
 		           }
-		           else if (idofmenucategory ==3)
+		           else if (idofmenucategory ==3) //diabetes
 		           {
 		        	   if( xvalue==1)
 			        	{
@@ -123,7 +127,7 @@ public class foodService implements IfoodService {
 			           else if(xvalue < 1)
 			           {
 			        	   fb.setFoodsandtheircallories(onefood);
-				        	fb.setGramsneeded(100/xvalue);
+				        	fb.setGramsneeded(120);
 				        	fb.setMedicalRec(onemed);
 				        	fb.setPublishedDate(date1);
 				        	foodgrammage.save(fb);	   
@@ -131,7 +135,7 @@ public class foodService implements IfoodService {
 			           else if(xvalue >1)
 			           {
 			        	   fb.setFoodsandtheircallories(onefood);
-				        	fb.setGramsneeded(100*xvalue);
+				        	fb.setGramsneeded(80);
 				        	fb.setMedicalRec(onemed);
 				        	fb.setPublishedDate(date1);
 				        	foodgrammage.save(fb);	   
@@ -139,5 +143,25 @@ public class foodService implements IfoodService {
 		           }      
 			}	
 		}
+	
+//	
+//	/* La formule de Lorentz */
+//	idealpoids = med.getHeight() - 100 - ((med.getHeight() - 150) / 4);
+//	/* calcul avec indice de masse corporelle */
+//	 IMC = (float) (med.getWeight() / (Math.pow(med.getHeight()/100, 2)));
+
+	
+	
+	public MedicalRec ajouterMedicalrecord(MedicalRec medicalRec) {
+		return medrec.save(medicalRec);
+		
+	}
+	
+	public void ajouterfoodsandtheircallory(FoodCalories fd) {
+		food.save(fd);
+		
+	}
+	
+
 	}
 

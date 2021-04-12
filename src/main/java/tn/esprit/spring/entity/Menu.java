@@ -31,8 +31,7 @@ public class Menu implements Serializable {
 	
 
 	
-	//@OneToOne(mappedBy = "menu", cascade = CascadeType.ALL)
-	//kinderGarten kindergarten;
+	
 
 	public int getId() {
 		return id;
