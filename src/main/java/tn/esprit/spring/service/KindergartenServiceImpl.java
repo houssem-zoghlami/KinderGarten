@@ -61,5 +61,7 @@ public class KindergartenServiceImpl implements IKindergartenService {
 		List<Kindergarten> kindergarten = (List<Kindergarten>) kindergartenRepository.findAll();
 		return kindergarten;
 	}
+	
+
 
 }

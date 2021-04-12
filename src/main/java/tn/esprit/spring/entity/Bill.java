@@ -32,7 +32,7 @@ public class Bill implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date date_bill;
 
-	private float discount = 0;
+	private double discount = 0;
 	
 	private float Nbrs_month = 1;
 

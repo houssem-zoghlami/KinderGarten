@@ -1,9 +1,17 @@
 package tn.esprit.spring.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,10 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entity.Bill;
 import tn.esprit.spring.service.IBillService;
 
+@RestController
 public class BillController {
 
 	@Autowired
@@ -68,6 +78,21 @@ public class BillController {
 	public List<Bill> getBillsByDate(@RequestBody Date date) {
 		List<Bill> list = ibillservice.getAllBillByDate(date);
 		return list;
+	}
+
+	// http://localhost:8082/springMVC/servlet/exportpdf/{bill-id}
+	@GetMapping(value = "/exportpdf/{bill-id}", produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<InputStreamResource> userReports(@PathVariable("bill-id") int billId,HttpServletResponse response
+			) throws IOException {
+
+		ByteArrayInputStream bis = ibillservice.PutBillInPdf(billId);
+
+		HttpHeaders headers = new HttpHeaders();
+
+		headers.add("Content-Disposition", "attachment;filename=employees.pdf");
+
+		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
+				.body(new InputStreamResource(bis));
 	}
 
 }

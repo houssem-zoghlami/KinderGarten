@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-
 @Entity
 
 @Data
@@ -23,12 +22,14 @@ public class Child implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id_child;
-	
+
 	private String firstname;
 	private String lastname;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Genders gender;
+
+	private boolean subscribe = false;
 
 	private int age;
 	@Temporal(TemporalType.DATE)
@@ -39,5 +40,4 @@ public class Child implements Serializable {
 	@ManyToOne
 	private Kindergarten kindergarten;
 
-	
 }

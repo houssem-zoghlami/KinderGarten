@@ -1,5 +1,6 @@
 package tn.esprit.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class ChildServiceImpl implements IChildService {
 	public Child updateChild(int id, Child child) {
 		Child childs = childRepository.findById(id).orElse(null);
 
-		if (child.getAge()!= 0) {
+		if (child.getAge() != 0) {
 			childs.setAge(child.getAge());
 		}
 		if (child.getDate() != null) {
@@ -45,7 +46,7 @@ public class ChildServiceImpl implements IChildService {
 		if (child.getFirstname() != null) {
 			childs.setFirstname(child.getFirstname());
 		}
-	
+
 		childRepository.save(childs);
 		return childs;
 	}
@@ -61,5 +62,28 @@ public class ChildServiceImpl implements IChildService {
 		List<Child> child = (List<Child>) childRepository.findAll();
 		return child;
 	}
+
+	@Override
+	public List<Parent> getAllParentOfChildNoSubscribe() {
+		List<Child> childs = (List<Child>) childRepository.findAll();
+		List<Parent> parents = new ArrayList<Parent>();
+		for (Child child : childs) {
+			if (!child.isSubscribe()) {
+				parents.add(child.getParent());
+			}
+		}
+		return parents;
+	}
+
+	@Override
+	public List<Parent> getAllParent(List<Child> child) {
+		List<Parent> parents = new ArrayList<Parent>();
+		for (Child childs : child) {
+				parents.add(childs.getParent());
+		}
+		return parents;
+	}
+	
+	
 
 }

@@ -11,7 +11,7 @@ import tn.esprit.spring.entity.State_event;
 
 public interface IEventService {
 
-	public void addEvent(Event event);
+	public void addEvent(Event event,int id_kindergarten);
 
 	public void deleteEvent(int id);
 
@@ -34,5 +34,7 @@ public interface IEventService {
 	public Event addCouponInEvent(int id, Coupon coupon);
 
 	public State_event makeState(Date date, int duration);
+
+	public void sendMailNewEvent(String subject, String recipient, String message);
 
 }

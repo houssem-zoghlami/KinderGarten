@@ -1,5 +1,6 @@
 package tn.esprit.spring.service;
 
+import java.io.ByteArrayInputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -22,5 +23,7 @@ public interface IBillService {
 	public List<Bill> getAllBillByDate(Date date);
 	
 	public double calculBill(Kindergarten kindergarten,Bill bill);
+	
+	public ByteArrayInputStream PutBillInPdf(int id);
 	
 }

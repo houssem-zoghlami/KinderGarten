@@ -4,13 +4,21 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.entity.Child;
 import tn.esprit.spring.entity.Coupon;
 import tn.esprit.spring.entity.Event;
 import tn.esprit.spring.entity.Event_Activity;
 import tn.esprit.spring.entity.Event_for;
+import tn.esprit.spring.entity.Kindergarten;
+import tn.esprit.spring.entity.Parent;
 import tn.esprit.spring.entity.State_event;
 import tn.esprit.spring.repository.CouponRepository;
 import tn.esprit.spring.repository.EventRepository;
@@ -26,9 +34,29 @@ public class EventServiceImpl implements IEventService {
 
 	@Autowired
 	ICouponService icouponService;
+	
+	@Autowired
+	IKindergartenService ikindergartenService;
+	
+	@Autowired
+	IChildService ichildService;
+	
+	@Autowired
+	public JavaMailSender mailSenderObj;
 
 	@Override
-	public void addEvent(Event event) {
+	public void addEvent(Event event,int id_kindergarten) {
+		Kindergarten kindergarten = ikindergartenService.retrieveKindergarten(id_kindergarten);
+		event.setKindergarten(kindergarten);
+		List<Child> child = kindergarten.getChild();
+		String subject = "New Event";
+		String Message = "You can join ours Event it's "+ event.getEventActivity();
+		List<Parent> parents = ichildService.getAllParent(child);
+		for(Parent parent: parents)
+		{
+			sendMailNewEvent(subject,parent.getEmail(),Message);
+		}
+		
 		event.setStateEvent(makeState(event.getOpening(), event.getDuration()));
 		eventRepository.save(event);
 	}
@@ -139,6 +167,28 @@ public class EventServiceImpl implements IEventService {
 			return State_event.FINISH;
 		}
 		return State_event.IN_PROGRESS;
+	}
+
+	@Override
+	public void sendMailNewEvent(String subject,String recipient,String message) {
+
+		String emailToRecipient = recipient;
+		String emailSubject = subject;
+		String emailMessage1 = message;
+
+		mailSenderObj.send(new MimeMessagePreparator() {
+
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+
+				MimeMessageHelper mimeMessageHelperObj = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+				mimeMessageHelperObj.setTo(emailToRecipient);
+				mimeMessageHelperObj.setText(emailMessage1, true);
+				mimeMessageHelperObj.setSubject(emailSubject);
+			}
+
+		});
+		
 	}
 
 }
