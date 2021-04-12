@@ -1,39 +1,52 @@
 package tn.esprit.spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import java.time.Instant;
+import java.util.Set;
 
-@Entity
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@NoArgsConstructor
+@Entity
+public class User {
 
-public class User implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    private Long userId;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+    @NotBlank(message = "Username is required")
+    private String username;
 
-	private String password;
-	
-	@Enumerated(EnumType.STRING)
-	private Role role;
+    @NotBlank(message = "Password is required")
+    private String password;
 
-	@Temporal(TemporalType.DATE)
-	private Date dateInscription;
+    @Email
+    @NotEmpty(message = "Email is required")
+    private String email;
 
-	// @OneToMany(cascade = CascadeType.ALL,mappedBy="post")
-	// private List<Post> post;
+    private Instant created;
+    private String phoneNumber;
+
+    private boolean enabled; // validated user or not
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Publication> publications;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Publicity> publicity;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Rating> ratings;
+
 
 }
