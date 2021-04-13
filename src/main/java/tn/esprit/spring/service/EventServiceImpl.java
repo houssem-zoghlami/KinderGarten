@@ -12,7 +12,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.entity.Child;
 import tn.esprit.spring.entity.Coupon;
 import tn.esprit.spring.entity.Event;
 import tn.esprit.spring.entity.Event_Activity;
@@ -48,16 +47,16 @@ public class EventServiceImpl implements IEventService {
 	public void addEvent(Event event,int id_kindergarten) {
 		Kindergarten kindergarten = ikindergartenService.retrieveKindergarten(id_kindergarten);
 		event.setKindergarten(kindergarten);
-		List<Child> child = kindergarten.getChild();
 		String subject = "New Event";
-		String Message = "You can join ours Event it's "+ event.getEventActivity();
-		List<Parent> parents = ichildService.getAllParent(child);
+		String Message = "You can join ours Event it's ";
+		List<Parent> parents = ichildService.getAllParent(id_kindergarten);
 		for(Parent parent: parents)
-		{
-			sendMailNewEvent(subject,parent.getEmail(),Message);
+		{if(parent.getEmail()!= null)
+			{sendMailNewEvent(subject,parent.getEmail(),Message);}
 		}
-		
+		if(event.getOpening() != null){
 		event.setStateEvent(makeState(event.getOpening(), event.getDuration()));
+		}
 		eventRepository.save(event);
 	}
 

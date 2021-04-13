@@ -36,7 +36,7 @@ public class Kindergarten extends User implements Serializable {
 	@OneToMany(mappedBy = "kindergarten", cascade = CascadeType.ALL)
 	private List<Event> event;
 	
-	@OneToMany(mappedBy ="kindergarten",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy ="kindergarten",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<Child> child;
 	
 	@OneToMany(mappedBy ="kindergarten",cascade = CascadeType.ALL)

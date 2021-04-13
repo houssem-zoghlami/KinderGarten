@@ -82,7 +82,7 @@ public class ParentController {
 	}
 	
 
-	// http://localhost:8082/springMVC/servlet/join-kindergarten/{parent-id}/{event-id}/{month-join}
+	// http://localhost:8082/springMVC/servlet/join-kindergarten/{kindergarten-id}/{parent-id}/{month-join}/{child-id}
 	@PostMapping(path = "/join-kindergarten/{kindergarten-id}/{parent-id}/{month-join}/{child-id}")
 	@ResponseBody
 	public int joinkindergarten(@PathVariable("parent-id") int parentId,

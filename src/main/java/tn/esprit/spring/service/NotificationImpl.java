@@ -101,6 +101,7 @@ public class NotificationImpl implements INotificationService {
 			if (kindergarten == null) {
 				notification.setSubject("we don't have a kindergarten near you");
 				notification.setMessage("sorry but there is no kindergarten near you yet");
+				notification.setAttachment(null);
 			} else {
 				notification.setSubject("your child is not to sign");
 				notification.setMessage("here is the list of kindergartens near you :");

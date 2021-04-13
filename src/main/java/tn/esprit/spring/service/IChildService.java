@@ -19,6 +19,8 @@ public interface IChildService {
 	
 	public List<Parent> getAllParentOfChildNoSubscribe();
 	
-	public List<Parent> getAllParent(List<Child> child);
+	public List<Parent> getAllParent(int id);
+	
+	public List<Child> getAllchildBykindergarten(int id); 
 
 }

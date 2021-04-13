@@ -29,9 +29,9 @@ public class EventController {
 	// http://localhost:8082/springMVC/servlet/add-event/{kindergarten-id}
 	@PostMapping(value = "/add-event/{kindergarten-id}")
 	@ResponseBody
-	public Event adEvents(@RequestBody Event event,@PathVariable("kindergarten-id") int Id) {
+	public int adEvents(@RequestBody Event event,@PathVariable("kindergarten-id") int Id) {
 		ieventservice.addEvent(event,Id);
-		return event;
+		return 1;
 	}
 
 	// http://localhost:8082/springMVC/servlet/modify-event/{event-id}

@@ -156,8 +156,11 @@ public class ParentServiceImpl implements IParentService {
 			return 0;
 		}	
 		ibillService.addBill(month, idKindergarten, idParent);
-		kindergarten.getChild().add(child);
-		kindergartenRepository.save(kindergarten);
+	//	kindergarten.getChild().add(child);
+		child.setSubscribe(true);
+		child.setKindergarten(kindergarten);
+		ichildService.updateChild(idchild, child);
+		//kindergartenRepository.save(kindergarten);
 		parentRepository.save(parent);
 		return 1;
 	}
