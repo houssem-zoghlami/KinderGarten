@@ -11,7 +11,7 @@ import tn.esprit.spring.entity.State_event;
 
 public interface IEventService {
 
-	public void addEvent(Event event,int id_kindergarten);
+	public Event addEvent(Event event,int id_kindergarten);
 
 	public void deleteEvent(int id);
 

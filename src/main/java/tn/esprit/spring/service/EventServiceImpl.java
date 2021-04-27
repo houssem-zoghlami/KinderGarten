@@ -44,7 +44,7 @@ public class EventServiceImpl implements IEventService {
 	public JavaMailSender mailSenderObj;
 
 	@Override
-	public void addEvent(Event event,int id_kindergarten) {
+	public Event addEvent(Event event,int id_kindergarten) {
 		Kindergarten kindergarten = ikindergartenService.retrieveKindergarten(id_kindergarten);
 		event.setKindergarten(kindergarten);
 		String subject = "New Event";
@@ -58,6 +58,7 @@ public class EventServiceImpl implements IEventService {
 		event.setStateEvent(makeState(event.getOpening(), event.getDuration()));
 		}
 		eventRepository.save(event);
+		return event;
 	}
 
 	@Override
