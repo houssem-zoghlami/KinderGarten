@@ -30,9 +30,11 @@ public class Child implements Serializable {
 	
 	private String firstname;
 	private String lastname;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Genders gender;
+
+	private boolean subscribe = false;
 
 	private int age;
 	@Temporal(TemporalType.DATE)

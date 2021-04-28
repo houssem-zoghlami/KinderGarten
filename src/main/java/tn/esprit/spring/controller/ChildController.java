@@ -24,7 +24,7 @@ public class ChildController {
 	
 	///////////////////////////////////////////////////////////////// CRUD////////////////////////////////////////////////////////////////////////////////////////////
 
-	// http://localhost:8082/springMVC/servlet/add-child/{event-id}
+	// http://localhost:8082/springMVC/servlet/add-child/{parent-id}
 	@PostMapping(value = "/add-child/{parent-id}")
 	@ResponseBody
 	public int adChild(@PathVariable("parent-id") int parentId, @RequestBody Child child) {

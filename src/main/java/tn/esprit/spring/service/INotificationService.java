@@ -1,9 +1,13 @@
 package tn.esprit.spring.service;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import tn.esprit.spring.entity.Kindergarten;
 import tn.esprit.spring.entity.Notification;
+import tn.esprit.spring.entity.Parent;
 
 public interface INotificationService {
 
@@ -17,6 +21,14 @@ public interface INotificationService {
 
 	public List<Notification> retrieveAllNotification();
 
-	public List<Notification> retrieveNotifByState(boolean state_notification);
+	public List<Notification> retrieveNotifByRecipient(String recipient);
+
+	public void sendMail(Notification notification) throws IOException;
+
+	public void SendNotificationForAllParent() throws IOException;
+
+	public List<Kindergarten> takekindergartenByParent(Parent parent);
+
+	public ByteArrayInputStream ListKindergartenToPdf(List<Kindergarten> kindergartens);
 
 }

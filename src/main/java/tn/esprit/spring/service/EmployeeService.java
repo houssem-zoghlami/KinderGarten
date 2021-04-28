@@ -1,18 +1,15 @@
 package tn.esprit.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.batch.BatchProperties.Job;
 import org.springframework.stereotype.Service;
-
 import tn.esprit.spring.entity.Employee;
-import tn.esprit.spring.entity.Role;
-import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.IemployeeRepository;
 
 
 @Service
 
-public class EmployeeService implements IEmployeeService {
+public class EmployeeService {
+	
 	@Autowired
 	IemployeeRepository iemployeeRepository;
 	
@@ -28,10 +25,7 @@ public class EmployeeService implements IEmployeeService {
 	}
 
 
-	
-
-	@Override
-	public void updateEmployee(int employee_id, String employee_name, int age, tn.esprit.spring.entity.Job job) {
+	public void updateEmployee(int employee_id, String employee_name, int age,tn.esprit.spring.entity.Job job) {
 		// TODO Auto-generated method stub
 		Employee u = iemployeeRepository.findById(employee_id).orElse(null);
 		u.setEmployeename(employee_name);

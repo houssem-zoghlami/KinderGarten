@@ -14,11 +14,12 @@ import tn.esprit.spring.entity.Meeting_state;
 @Repository
 public interface Meeting_availableRepository extends CrudRepository<Meeting_available, Integer> {
 
+	
 	@Query("select m from Meeting_available m where m.meetingtype=:meeting_type")
 	public List<Meeting_available> getAllMeetingByType(@Param("meeting_type") Meeting_type meeting_type);
 
 	@Query("select m from Meeting_available m where m.meetingstate=:meeting_state")
-	public List<Meeting_available> getAllMeetingByState(@Param("state_event") Meeting_state meeting_state);
+	public List<Meeting_available> getAllMeetingByState(@Param("meeting_state") Meeting_state meeting_state);
 
 	@Query("SELECT count(meeting) FROM Meeting_available m where m.id_meeting =:id")
 	public int countMeeting(@Param("id") int id);

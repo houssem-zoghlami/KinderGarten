@@ -12,6 +12,6 @@ import tn.esprit.spring.entity.Notification;
 @Repository
 public interface NotificationRepository extends CrudRepository<Notification, Integer> {
 
-	@Query("select n FROM Notification n where n.state_notification =:state_notification")
-	public List<Notification> retrieveNotifByState(@Param("state_notification") boolean state_notification);
+	@Query("select n FROM Notification n where n.recipient =:recipient")
+	public List<Notification> retrieveNotifByRecipient(@Param("recipient") String recipient);
 }

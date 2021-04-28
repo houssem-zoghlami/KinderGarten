@@ -1,4 +1,4 @@
-package tn.esprit.spring.entity.controller;
+package tn.esprit.spring.controller;
 
 import java.util.List;
 

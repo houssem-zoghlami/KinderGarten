@@ -36,7 +36,7 @@ public class ChildServiceImpl implements IChildService {
 	public Child updateChild(int id, Child child) {
 		Child childs = childRepository.findById(id).orElse(null);
 
-		if (child.getAge()!= 0) {
+		if (child.getAge() != 0) {
 			childs.setAge(child.getAge());
 		}
 		if (child.getDate() != null) {
@@ -45,7 +45,7 @@ public class ChildServiceImpl implements IChildService {
 		if (child.getFirstname() != null) {
 			childs.setFirstname(child.getFirstname());
 		}
-	
+		childs.setSubscribe(child.isSubscribe());
 		childRepository.save(childs);
 		return childs;
 	}
@@ -61,5 +61,24 @@ public class ChildServiceImpl implements IChildService {
 		List<Child> child = (List<Child>) childRepository.findAll();
 		return child;
 	}
+
+	@Override
+	public List<Parent> getAllParentOfChildNoSubscribe() {
+		return childRepository.getAllParentOfChildNoSubscribe();
+	}
+
+	@Override
+	public List<Parent> getAllParent(int id) {
+		List<Parent> parents = childRepository.getAllParent(id);
+		return parents;
+	}
+
+	@Override
+	public List<Child> getAllchildBykindergarten(int id) {
+		
+		return childRepository.getAllChildByKindergarten(id);
+	}
+	
+	
 
 }

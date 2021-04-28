@@ -15,18 +15,12 @@ import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-
-
 public class Bill implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -38,7 +32,7 @@ public class Bill implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date date_bill;
 
-	private float discount = 0;
+	private double discount = 0;
 	
 	private float Nbrs_month = 1;
 
@@ -54,14 +48,4 @@ public class Bill implements Serializable {
 
 	@ManyToOne
 	private Kindergarten kindergarten;
-
-
-
-	
-	
-	
-	
-	
-
-
 }
