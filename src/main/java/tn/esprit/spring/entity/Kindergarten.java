@@ -7,6 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,7 +21,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-
 public class Kindergarten extends User implements Serializable {
 	/**
 	 * 
@@ -30,22 +34,19 @@ public class Kindergarten extends User implements Serializable {
 	private double price_month=0;
 	private double discount=0;
 	
-	@Lob
-	private byte[] image;
+	private String image;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "kindergarten", cascade = CascadeType.ALL)
 	private List<Event> event;
-	
-	@OneToMany(mappedBy ="kindergarten",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+
+	@JsonIgnore
+	@JsonManagedReference
+	@OneToMany(mappedBy ="kindergarten",cascade = CascadeType.ALL)
 	private List<Child> child;
-	
+
+	@JsonBackReference
 	@OneToMany(mappedBy ="kindergarten",cascade = CascadeType.ALL)
 	private List<Bill> bill;
-	
-	// @ManyToMany(cascade = CascadeType.ALL)
-	// private List<User> user;
-	//
-	// @OneToMany(cascade = CascadeType.ALL,mappedBy="child")
-	// private List<Child> child;
 
 }

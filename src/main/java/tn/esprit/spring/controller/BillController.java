@@ -79,17 +79,24 @@ public class BillController {
 		List<Bill> list = ibillservice.getAllBillByDate(date);
 		return list;
 	}
+	
+	@GetMapping("/getallbillByParent/{bill-id}")
+	@ResponseBody
+	public List<Bill> getBillsByParent(@PathVariable("bill-id") int billId) {
+		List<Bill> list = ibillservice.FindbillByParent(billId);
+		return list;
+	}
 
 	// http://localhost:8082/springMVC/servlet/exportpdf/{bill-id}
 	@GetMapping(value = "/exportpdf/{bill-id}", produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> userReports(@PathVariable("bill-id") int billId,HttpServletResponse response
+	public ResponseEntity<InputStreamResource> billReports(@PathVariable("bill-id") int billId,HttpServletResponse response
 			) throws IOException {
 
 		ByteArrayInputStream bis = ibillservice.PutBillInPdf(billId);
 
 		HttpHeaders headers = new HttpHeaders();
 
-		headers.add("Content-Disposition", "attachment;filename=employees.pdf");
+		headers.add("Content-Disposition", "attachment;filename=Bill"+billId+".pdf");
 
 		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
 				.body(new InputStreamResource(bis));

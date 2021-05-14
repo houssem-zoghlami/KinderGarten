@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Bill implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -43,9 +47,13 @@ public class Bill implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Payment payment;
 
+	@JsonIgnore
+	@JsonManagedReference
 	@ManyToOne
 	private Parent parent;
 
+	@JsonIgnore
+	@JsonManagedReference
 	@ManyToOne
 	private Kindergarten kindergarten;
 }

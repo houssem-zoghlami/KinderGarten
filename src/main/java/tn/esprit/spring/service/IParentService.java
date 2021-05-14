@@ -32,6 +32,8 @@ public interface IParentService {
 	public int unparticipateParentInEvent(int idParent, int idEvent);
 	
 	public int joinKindergarten(int idParent, int idKindergarten, int month, int idChild);
+	
+
 
 	
 

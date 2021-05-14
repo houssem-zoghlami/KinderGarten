@@ -52,6 +52,7 @@ public class ParentServiceImpl implements IParentService {
 		if (parent.getPhone() != 0) {
 			parents.setPhone(parent.getPhone());
 		}
+		
 		if (parent.getAddress() != null) {
 			parents.setAddress(parent.getAddress());
 		}
@@ -164,5 +165,29 @@ public class ParentServiceImpl implements IParentService {
 		parentRepository.save(parent);
 		return 1;
 	}
+
+//	@Override
+//	public void addPic(int idParent, MultipartFile file) {
+//		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//		Parent parent = parentRepository.findById(idParent).orElse(null);
+//		if(parent != null)
+//		{
+//			if(fileName.contains(".."))
+//			{
+//				System.out.println("not a a valid file");
+//			}
+//			try {
+//				parent.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		parentRepository.save(parent);		
+//	}
+
+
+
+
+	
 
 }

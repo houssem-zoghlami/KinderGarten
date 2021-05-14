@@ -9,11 +9,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import tn.esprit.spring.entity.Bill;
+import tn.esprit.spring.entity.Parent;
 
 @Repository
 public interface BillRepository extends CrudRepository<Bill, Integer> {
 
 	@Query("select b from Bill b where b.date_bill=:date_bill")
 	public List<Bill> getAllBillByDate(@Param("date_bill") Date date);
+	
+	public List<Bill> getAllBillByParent(Parent parent);
 
 }

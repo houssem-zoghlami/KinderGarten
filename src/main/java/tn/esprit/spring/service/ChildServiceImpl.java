@@ -45,6 +45,9 @@ public class ChildServiceImpl implements IChildService {
 		if (child.getFirstname() != null) {
 			childs.setFirstname(child.getFirstname());
 		}
+		if (child.getLastname() != null) {
+			childs.setLastname(child.getLastname());
+		}
 		childs.setSubscribe(child.isSubscribe());
 		childRepository.save(childs);
 		return childs;
@@ -77,6 +80,14 @@ public class ChildServiceImpl implements IChildService {
 	public List<Child> getAllchildBykindergarten(int id) {
 		
 		return childRepository.getAllChildByKindergarten(id);
+	}
+
+	@Override
+	public void unsubscribeChildren(int id) {
+		Child child = childRepository.findById(id).orElse(null);
+		child.setSubscribe(false);
+		child.setKindergarten(null);
+		childRepository.save(child);
 	}
 	
 	

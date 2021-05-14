@@ -24,9 +24,9 @@ public class KindergartenController {
 	// http://localhost:8082/springMVC/servlet/add-kindergarten
 		@PostMapping(value = "/add-kindergarten")
 		@ResponseBody
-		public int adKindergarten(@RequestBody Kindergarten kindergarten) {
+		public Kindergarten adKindergarten(@RequestBody Kindergarten kindergarten) {
 			ikindergartenService.addKindergarten(kindergarten);
-			return 1;
+			return kindergarten;
 		}
 
 		// http://localhost:8082/springMVC/servlet/modify-kindergarten/{kindergarten-id}
@@ -54,7 +54,7 @@ public class KindergartenController {
 		// http://localhost:8082/springMVC/servlet/retrieve-kindergarten/{kindergarten-id}
 		@GetMapping(path = "/retrieve-kindergarten/{kindergarten-id}")
 		@ResponseBody
-		public Kindergarten retrieveCoupon(@PathVariable("coupon-id") int kindergartenId) {
+		public Kindergarten retrieveCoupon(@PathVariable("kindergarten-id") int kindergartenId) {
 			return ikindergartenService.retrieveKindergarten(kindergartenId);
 		}
 

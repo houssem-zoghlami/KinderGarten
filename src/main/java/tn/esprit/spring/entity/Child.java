@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,6 +16,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Child implements Serializable {
 
 	/**
@@ -32,12 +36,18 @@ public class Child implements Serializable {
 	private boolean subscribe = false;
 
 	private int age;
+	
 	@Temporal(TemporalType.DATE)
 	private Date date;
-
+	
+	@JsonIgnore
+	@JsonBackReference
 	@ManyToOne
 	private Parent parent;
-	@ManyToOne
+	
+	
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Kindergarten kindergarten;
 
 }

@@ -10,11 +10,16 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +31,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Parent extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -35,10 +41,8 @@ public class Parent extends User implements Serializable {
 	private String email;
 	private String address;
 	private int phone;
-	
-	@Lob
-	private byte[] image;
-	
+	private String image;
+
 	@Enumerated(EnumType.STRING)
 	private Genders gender;
 
@@ -48,9 +52,13 @@ public class Parent extends User implements Serializable {
 	@ManyToMany(mappedBy = "parent")
 	private List<Event> event;
 
+	@JsonIgnore
+	@JsonManagedReference
 	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
 	private List<Child> child;
-
+	
+	
+	@JsonBackReference
 	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
 	private List<Bill> bill;
 

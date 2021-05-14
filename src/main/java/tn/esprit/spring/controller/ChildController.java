@@ -27,9 +27,8 @@ public class ChildController {
 	// http://localhost:8082/springMVC/servlet/add-child/{parent-id}
 	@PostMapping(value = "/add-child/{parent-id}")
 	@ResponseBody
-	public int adChild(@PathVariable("parent-id") int parentId, @RequestBody Child child) {
+	public void adChild(@PathVariable("parent-id") int parentId, @RequestBody Child child) {
 		ichildservice.addChild(child, parentId);
-		return 1;
 	}
 
 	// http://localhost:8082/springMVC/servlet/modify-child/{child-id}
@@ -54,12 +53,20 @@ public class ChildController {
 		return list;
 	}
 
-	// http://localhost:8082/springMVC/servlet/retrieve-coupon/{child-id}
+	// http://localhost:8082/springMVC/servlet/retrieve-child/{child-id}
 	
 	@GetMapping(path = "/retrieve-child/{child-id}")
 	@ResponseBody
 	public Child retrieveChild(@PathVariable("child-id") int childId) {
 		return ichildservice.retrieveChild(childId);
+	}
+	
+	// http://localhost:8082/springMVC/servlet/unsubscribeChild/{child-id}
+	
+	@PutMapping(path = "/unsubscribeChild/{child-id}")
+	@ResponseBody
+	public void unsubscribeChild(@PathVariable("child-id") int childId) {
+		 ichildservice.unsubscribeChildren(childId);
 	}
 
 }

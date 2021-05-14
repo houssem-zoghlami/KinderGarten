@@ -22,5 +22,7 @@ public interface IChildService {
 	public List<Parent> getAllParent(int id);
 	
 	public List<Child> getAllchildBykindergarten(int id); 
+	
+	public void unsubscribeChildren(int id);
 
 }

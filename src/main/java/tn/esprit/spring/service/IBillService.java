@@ -26,4 +26,6 @@ public interface IBillService {
 	
 	public ByteArrayInputStream PutBillInPdf(int id);
 	
+	public List<Bill> FindbillByParent(int idparent);
+	
 }

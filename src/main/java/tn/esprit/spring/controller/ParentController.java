@@ -22,18 +22,22 @@ public class ParentController {
 	IParentService iparentservice;
 
 	///////////////////////////////////////////////////////////////// CRUD////////////////////////////////////////////////////////////////////////////////////////////
-
-
 	
 	// http://localhost:8082/springMVC/servlet/add-parent
 	@PostMapping(value = "/add-parent")
 	@ResponseBody
 	public Parent adParent(@RequestBody Parent parent) {
-
 		iparentservice.addParent(parent);
 		return parent;
 	}
-
+	
+//	// http://localhost:8082/springMVC/servlet/add-parent
+//	@PostMapping(value = "/addPic/{parent-id}")
+//	@ResponseBody
+//	public void addPic(@PathVariable("parent-id") int parentId,@RequestParam("file") MultipartFile file) {
+//		iparentservice.addPic(parentId, file);		
+//	}
+	
 	// http://localhost:8082/springMVC/servlet/modify-parent/{parent-id}
 	@PutMapping("/modify-parent/{parent-id}")
 	@ResponseBody
@@ -85,9 +89,9 @@ public class ParentController {
 	// http://localhost:8082/springMVC/servlet/join-kindergarten/{kindergarten-id}/{parent-id}/{month-join}/{child-id}
 	@PostMapping(path = "/join-kindergarten/{kindergarten-id}/{parent-id}/{month-join}/{child-id}")
 	@ResponseBody
-	public int joinkindergarten(@PathVariable("parent-id") int parentId,
+	public void joinkindergarten(@PathVariable("parent-id") int parentId,
 			@PathVariable("kindergarten-id") int kindergartenId, @PathVariable("month-join") int monthjoin,@PathVariable("child-id") int childid) {
-		return iparentservice.joinKindergarten(parentId, kindergartenId, monthjoin,childid);
+		 iparentservice.joinKindergarten(parentId, kindergartenId, monthjoin,childid);
 	}
 
 

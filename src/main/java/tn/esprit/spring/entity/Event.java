@@ -11,7 +11,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -50,9 +49,8 @@ public class Event implements Serializable {
 	private int Duration = 0;
 
 	private int nbrs_Participants = 0;
-	
-	@Lob
-	private byte[] image;
+
+	private String image;
 
 	@Enumerated(EnumType.STRING)
 	private Event_for eventFor;

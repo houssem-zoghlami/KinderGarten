@@ -207,4 +207,11 @@ public class BillServiceImpl implements IBillService {
 		return new ByteArrayInputStream(out.toByteArray());
 	}
 
+	@Override
+	public List<Bill> FindbillByParent(int idparent) {
+		Parent parent = iparentService.retrieveParent(idparent);	
+		List<Bill> allBillByParent =  billRepository.getAllBillByParent(parent);
+		return allBillByParent;
+	}
+
 }
